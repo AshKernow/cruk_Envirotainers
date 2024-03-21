@@ -1,0 +1,38 @@
+name: R
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - r
+dependencies:
+  - r-base
+  - bioconductor-gsva
+  - r-tidyverse
+  - r-devtools
+  - ca-certificates
+  - openssl
+  - r-msigdbr
+  - r-rmysql
+  - bioconductor-deseq2
+  - bioconductor-clusterprofiler
+  - bioconductor-tximport
+  - r-dt
+  - r-ggfortify
+  - r-knitr
+  - r-patchwork
+  - r-pheatmap
+  - r-readxl
+  - r-ggrepel
+  - r-ggdendro
+  - r-ashr
+  - bioconductor-pathview
+  - bioconductor-qPLEXanalyzer
+  - bioconductor-scater
+  - bioconductor-scran
+  - r-seurat
+  - bioconductor-gsva
+  - bioconductor-milor
+  - bioconductor-bluster
+  - bioconductor-biocparallel
+  - bioconductor-pcatools
+  - r-caret
