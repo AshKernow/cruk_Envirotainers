@@ -36,3 +36,5 @@ dependencies:
   - bioconductor-biocparallel
   - bioconductor-pcatools
   - r-caret
+  - bioconductor-velociraptor
+  - r-languageserver
