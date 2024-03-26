@@ -1,8 +1,0 @@
-name: R_base
-channels:
-  - bioconda
-  - conda-forge
-  - defaults
-  - r
-dependencies:
-  - r-base
