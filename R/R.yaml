@@ -4,6 +4,9 @@ channels:
   - conda-forge
   - defaults
   - r
+variables:
+  EnvVersion: 1.0.0
+  Date: 2023-03-25
 dependencies:
   - r-base
   - bioconductor-gsva
@@ -26,7 +29,7 @@ dependencies:
   - r-ggdendro
   - r-ashr
   - bioconductor-pathview
-  - bioconductor-qPLEXanalyzer
+  - bioconductor-qplexanalyzer
   - bioconductor-scater
   - bioconductor-scran
   - r-seurat
