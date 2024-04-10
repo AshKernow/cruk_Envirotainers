@@ -32,6 +32,7 @@ dependencies:
   - r-islr2
   - r-knitr
   - r-languageserver
+  - r-leaps
   - r-msigdbr
   - r-patchwork
   - r-pheatmap
