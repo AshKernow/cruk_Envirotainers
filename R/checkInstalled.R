@@ -6,7 +6,8 @@ suppressPackageStartupMessages(library(tidyverse))
 
 pkgList <- yaml::yaml.load_file("R.yaml")$dependencies
 
-pks <- str_remove(pkgList, ".*-")
+pks <- str_remove(pkgList, ".*-") %>%
+    str_subset("certificates", negate = TRUE)
 
 # Check if a package is installed
 
