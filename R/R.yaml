@@ -38,4 +38,4 @@ dependencies:
   - r-caret
   - bioconductor-velociraptor
   - r-languageserver
-
+  - r-upsetr
