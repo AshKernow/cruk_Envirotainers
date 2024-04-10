@@ -5,37 +5,38 @@ channels:
   - defaults
   - r
 dependencies:
-  - r-base
-  - bioconductor-gsva
-  - r-tidyverse
-  - r-devtools
-  - ca-certificates
-  - openssl
-  - r-msigdbr
-  - r-rmysql
-  - bioconductor-deseq2
+  - bioconductor-biocparallel
+  - bioconductor-bluster
   - bioconductor-clusterprofiler
-  - bioconductor-tximport
-  - r-dt
-  - r-ggfortify
-  - r-knitr
-  - r-patchwork
-  - r-pheatmap
-  - r-readxl
-  - r-ggrepel
-  - r-ggdendro
-  - r-ashr
+  - bioconductor-deseq2
+  - bioconductor-gsva
+  - bioconductor-gsva
+  - bioconductor-milor
   - bioconductor-pathview
+  - bioconductor-pcatools
   - bioconductor-qplexanalyzer
   - bioconductor-scater
   - bioconductor-scran
-  - r-seurat
-  - bioconductor-gsva
-  - bioconductor-milor
-  - bioconductor-bluster
-  - bioconductor-biocparallel
-  - bioconductor-pcatools
-  - r-caret
+  - bioconductor-tximport
   - bioconductor-velociraptor
+  - ca-certificates
+  - openssl
+  - r-ashr
+  - r-base
+  - r-caret
+  - r-devtools
+  - r-dt
+  - r-ggdendro
+  - r-ggfortify
+  - r-ggrepel
+  - r-islr2
+  - r-knitr
   - r-languageserver
+  - r-msigdbr
+  - r-patchwork
+  - r-pheatmap
+  - r-readxl
+  - r-rmysql
+  - r-seurat
+  - r-tidyverse
   - r-upsetr
