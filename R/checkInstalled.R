@@ -11,9 +11,9 @@ pks <- str_remove(pkgList, ".*-") %>%
 
 # Check if a package is installed
 
-checkInstalled <- function(pkg) {
-    insPackages <- installed.packages() %>% rownames() %>% str_to_lower()
-    if (!pkg %in% insPackages) {
+insPackages <- installed.packages() %>% rownames() %>% str_to_lower()
+checkInstalled <- function(pkg, insList = insPackages) {
+    if (!pkg %in% insList) {
         print(paste0(pkg, " is not installed"))
     }
 }
