@@ -29,6 +29,7 @@ dependencies:
   - r-ggdendro
   - r-ggfortify
   - r-ggrepel
+  - r-glmnet
   - r-islr2
   - r-knitr
   - r-languageserver
