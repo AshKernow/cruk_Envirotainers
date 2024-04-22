@@ -9,6 +9,7 @@ dependencies:
   - bioconductor-bluster
   - bioconductor-clusterprofiler
   - bioconductor-deseq2
+  - bioconductor-dropletutils
   - bioconductor-gsva
   - bioconductor-gsva
   - bioconductor-milor
@@ -21,6 +22,7 @@ dependencies:
   - bioconductor-velociraptor
   - ca-certificates
   - openssl
+  - radian
   - r-ashr
   - r-base
   - r-caret
@@ -30,6 +32,7 @@ dependencies:
   - r-ggfortify
   - r-ggrepel
   - r-glmnet
+  - r-httpgd
   - r-islr2
   - r-knitr
   - r-languageserver

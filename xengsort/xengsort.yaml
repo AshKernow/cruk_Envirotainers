@@ -1,0 +1,5 @@
+name: xengsort
+channels:
+  - bioconda
+dependencies:
+  - xengsort=2.0.5
