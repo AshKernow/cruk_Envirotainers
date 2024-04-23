@@ -13,6 +13,8 @@ dependencies:
   - bioconductor-gsva
   - bioconductor-gsva
   - bioconductor-milor
+  - bioconductor-org.hs.eg.db
+  - bioconductor-org.mm.eg.db
   - bioconductor-pathview
   - bioconductor-pcatools
   - bioconductor-qplexanalyzer
@@ -43,5 +45,6 @@ dependencies:
   - r-readxl
   - r-rmysql
   - r-seurat
+  - r-svglite
   - r-tidyverse
   - r-upsetr
