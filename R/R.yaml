@@ -48,3 +48,4 @@ dependencies:
   - r-svglite
   - r-tidyverse
   - r-upsetr
+  - r-xml
