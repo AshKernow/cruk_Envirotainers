@@ -12,6 +12,7 @@ dependencies:
   - bioconductor-dropletutils
   - bioconductor-gsva
   - bioconductor-gsva
+  - bioconductor-msigdb
   - bioconductor-milor
   - bioconductor-org.hs.eg.db
   - bioconductor-org.mm.eg.db
