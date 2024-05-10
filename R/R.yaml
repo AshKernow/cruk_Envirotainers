@@ -10,6 +10,7 @@ dependencies:
   - bioconductor-clusterprofiler
   - bioconductor-deseq2
   - bioconductor-dropletutils
+  - bioconductor-ensembldb
   - bioconductor-gsva
   - bioconductor-gsva
   - bioconductor-msigdb
@@ -43,10 +44,11 @@ dependencies:
   - r-msigdbr
   - r-patchwork
   - r-pheatmap
+  - r-pls
   - r-readxl
   - r-rmysql
   - r-seurat
   - r-svglite
   - r-tidyverse
   - r-upsetr
-  - r-pls
+  - r-xml
