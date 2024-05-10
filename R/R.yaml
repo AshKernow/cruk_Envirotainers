@@ -10,6 +10,7 @@ dependencies:
   - bioconductor-clusterprofiler
   - bioconductor-deseq2
   - bioconductor-dropletutils
+  - bioconductor-ensembldb
   - bioconductor-gsva
   - bioconductor-gsva
   - bioconductor-msigdb
