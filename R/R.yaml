@@ -44,6 +44,7 @@ dependencies:
   - r-msigdbr
   - r-patchwork
   - r-pheatmap
+  - r-plotly
   - r-pls
   - r-readxl
   - r-rmysql
