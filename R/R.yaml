@@ -32,6 +32,7 @@ dependencies:
   - r-caret
   - r-devtools
   - r-dt
+  - r-furrr
   - r-ggdendro
   - r-ggfortify
   - r-ggrepel
@@ -45,6 +46,8 @@ dependencies:
   - r-msigdbr
   - r-patchwork
   - r-pheatmap
+  - r-plotly
+  - r-pls
   - r-readxl
   - r-rmysql
   - r-seurat
