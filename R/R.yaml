@@ -36,6 +36,7 @@ dependencies:
   - r-ggdendro
   - r-ggfortify
   - r-ggrepel
+  - r-ggvenn
   - r-glmnet
   - r-httpgd
   - r-islr2
