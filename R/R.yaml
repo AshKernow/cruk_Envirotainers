@@ -19,6 +19,7 @@ dependencies:
   - bioconductor-org.mm.eg.db
   - bioconductor-pathview
   - bioconductor-pcatools
+  - bioconductor-qdnaseq
   - bioconductor-qplexanalyzer
   - bioconductor-scater
   - bioconductor-scran
