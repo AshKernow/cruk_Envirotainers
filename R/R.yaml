@@ -28,13 +28,16 @@ dependencies:
   - openssl
   - radian
   - r-ashr
+  - r-bart
   - r-base
   - r-caret
   - r-devtools
   - r-dt
   - r-furrr
+  - r-gbm
   - r-ggdendro
   - r-ggfortify
+  - r-ggnewscale
   - r-ggrepel
   - r-ggvenn
   - r-glmnet
@@ -48,10 +51,13 @@ dependencies:
   - r-pheatmap
   - r-plotly
   - r-pls
+  - r-randomForest
   - r-readxl
   - r-rmysql
   - r-seurat
   - r-svglite
   - r-tidyverse
+  - r-timeDate
+  - r-tree
   - r-upsetr
   - r-xml
