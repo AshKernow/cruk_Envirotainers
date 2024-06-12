@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#mamba env update --file R.yaml
-#currDate=`date | sed 's/ /_/g'`
-#mamba env config vars set --name R CreationDate=${currDate}
+mamba env update --file R.yaml
+currDate=`date | sed 's/ /_/g'`
+mamba env config vars set --name R CreationDate=${currDate}
 
 # Log the current versions of all software
 
