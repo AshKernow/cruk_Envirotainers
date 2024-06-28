@@ -21,6 +21,7 @@ dependencies:
   - bioconductor-pcatools
   - bioconductor-qdnaseq
   - bioconductor-qplexanalyzer
+  - bioconductor-rrvgo
   - bioconductor-scater
   - bioconductor-scran
   - bioconductor-tximport
