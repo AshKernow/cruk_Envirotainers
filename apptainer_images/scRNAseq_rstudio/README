@@ -11,11 +11,16 @@ velociraptor).
 
 # 2. Modify the Dockerfile to install the software
 
-Need to modify the rocker/rstudio version to match the version of R that is required.
+* modify the rocker/rstudio version to match the version of R that is required.
+* modify the Bioconductor version to match the version of R that is required.
+* Add any new packages.
 
-Add any new packages.
+```
+xrAddPackagesToDockerFile.R
+```
+--> Dockerfile2
 
---> Dockerfile
+* Check and then rename the Dockerfile2 to Dockerfile.
 
 # 3. Build the Docker image
 

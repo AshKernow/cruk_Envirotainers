@@ -11,6 +11,7 @@ RUN apt-get install -y liblzma-dev
 RUN R --slave -e 'install.packages("BiocManager", lib="/usr/local/lib/R/site-library")'
 RUN R --slave -e 'BiocManager::install(version="3.19", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 
+# Install R packages
 RUN R --slave -e 'BiocManager::install("AnnotationHub", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 RUN R --slave -e 'BiocManager::install("BiocParallel", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 RUN R --slave -e 'BiocManager::install("BiocSingular", ask = FALSE, lib="/usr/local/lib/R/site-library")'
