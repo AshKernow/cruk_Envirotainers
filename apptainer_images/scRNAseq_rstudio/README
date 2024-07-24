@@ -1,0 +1,2 @@
+Build a container with RStudio server and various packages needed for single
+cell RNA-seq analysis. The container is based on the rocker/rstudio image.
