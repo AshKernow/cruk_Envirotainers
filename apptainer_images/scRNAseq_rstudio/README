@@ -1,0 +1,57 @@
+Build a container with RStudio server and various packages needed for single
+cell RNA-seq analysis. The container is based on the rocker/rstudio image.
+
+# 1. Gather list of R packages to install
+
+This comes in part from the scRNAseq course, plus some additional software that
+has been requested by users (e.g. Seurat) and some that I've used (e.g.
+velociraptor).
+
+--> scRNAseqPackages.txt
+
+# 2. Modify the Dockerfile to install the software
+
+* modify the rocker/rstudio version to match the version of R that is required.
+* modify the Bioconductor version to match the version of R that is required.
+* Add any new packages.
+
+```
+xrAddPackagesToDockerFile.R
+```
+--> Dockerfile2
+
+* Check and then rename the Dockerfile2 to Dockerfile.
+
+# 3. Build the Docker image
+
+```
+version=4.4.1
+sudo docker build -t scrnaseq_rstudio:v${version} .
+```
+
+# 3. Build the Singularity image
+
+```
+version=4.4.1
+sudo singularity build rstudio_scRNAseq_${version}.sif docker-daemon://scrnaseq_rstudio:v${version}
+```
+--> rstudio_scRNAseq_4.4.1.sif
+
+# 4. Check package installation
+
+Just check all the packages are installed.
+
+```
+singularity exec rstudio_scRNAseq_4.4.1.sif ./rCheckPackages.R 
+```
+
+# 5. Test the image
+
+Copy the server test directory to the scratch space
+
+```
+cp rstudio_scRNAseq_4.4.1.sif rstudio_server_test/rs_images/.
+cp -pvr rstudio_server_test ~/CScratch/.
+```
+
+use `rstudio-server.sh` to start the server and test it.
