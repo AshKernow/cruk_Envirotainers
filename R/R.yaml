@@ -61,5 +61,6 @@ dependencies:
   - r-tidyverse
   - r-timeDate
   - r-tree
+  - r-umap
   - r-upsetr
   - r-xml
