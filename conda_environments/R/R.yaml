@@ -8,14 +8,18 @@ dependencies:
   - bioconductor-biocparallel
   - bioconductor-bluster
   - bioconductor-clusterprofiler
+  - bioconductor-decoupler
   - bioconductor-deseq2
   - bioconductor-dropletutils
   - bioconductor-ensembldb
+  - bioconductor-experimenthub
+  - bioconductor-gseabase
   - bioconductor-gsva
   - bioconductor-gsva
   - bioconductor-msigdb
   - bioconductor-milor
-  - bioconductor-org.hs.eg.db
+  - bioconductor-omnipathr
+  - bioconductor-org.mm.eg.db
   - bioconductor-org.mm.eg.db
   - bioconductor-pathview
   - bioconductor-pcatools
@@ -39,7 +43,9 @@ dependencies:
   - r-gbm
   - r-ggdendro
   - r-ggfortify
+  - r-ggforce
   - r-ggnewscale
+  - r-ggprism
   - r-ggrepel
   - r-ggvenn
   - r-glmnet
@@ -49,6 +55,7 @@ dependencies:
   - r-languageserver
   - r-leaps
   - r-msigdbr
+  - r-optparse
   - r-patchwork
   - r-pheatmap
   - r-plotly
