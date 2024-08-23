@@ -23,6 +23,7 @@ dependencies:
   - bioconductor-org.mm.eg.db
   - bioconductor-pathview
   - bioconductor-pcatools
+  - bioconductor-progeny
   - bioconductor-qdnaseq
   - bioconductor-qplexanalyzer
   - bioconductor-rrvgo
