@@ -1,3 +1,4 @@
+apeglm
 BiocParallel
 bluster
 clusterProfiler
@@ -40,6 +41,7 @@ glmnet
 ISLR2
 knitr
 leaps
+OmnipathR
 optparse
 patchwork
 pheatmap
