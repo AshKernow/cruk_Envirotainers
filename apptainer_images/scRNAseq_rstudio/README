@@ -16,7 +16,7 @@ velociraptor).
 * Add any new packages.
 
 ```
-xrAddPackagesToDockerFile.R
+./xrAddPackagesToDockerFile.R
 ```
 --> Dockerfile2
 
@@ -42,7 +42,7 @@ sudo singularity build rstudio_scRNAseq_${version}.sif docker-daemon://scrnaseq_
 Just check all the packages are installed.
 
 ```
-singularity exec rstudio_scRNAseq_4.4.1.sif ./rCheckPackages.R 
+singularity exec rstudio_scRNAseq_4.4.1.sif ./xrCheckPackages.R 
 ```
 
 # 5. Test the image
