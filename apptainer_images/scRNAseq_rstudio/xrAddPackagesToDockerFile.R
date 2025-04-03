@@ -7,7 +7,9 @@ dat <- read_lines("Dockerfile")
 
 # Remove R packages installation lines
 end <- str_which(dat, "# Install R packages")
-dat <- dat[1:end]
+stt <- str_which(dat, "# End R packages")
+dat1 <- dat[1:end]
+dat2 <- dat[stt:length(dat)]
 
 # Read in the R packages to install
 rPackages <- read_lines("scRNAseqPackages.txt")
@@ -18,7 +20,7 @@ runLines <- str_c("RUN R --slave -e 'BiocManager::install(\"",
                    "\", ask = FALSE, lib=\"/usr/local/lib/R/site-library\")'")
 
 # Add the R packages to the Dockerfile
-dat <- c(dat, runLines)
+dat <- c(dat1, runLines, dat2)
 
 # Export the new Dockerfile
-write_lines(dat, "Dockerfile2")
+write_lines(dat, "Dockerfile")
