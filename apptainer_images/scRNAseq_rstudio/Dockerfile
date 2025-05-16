@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.4.3
+FROM rocker/rstudio:4.5.0
 
 RUN apt-get update && \
     apt-get install -y libxml2 libz-dev libbz2-dev libglpk-dev libcairo2-dev
@@ -9,7 +9,7 @@ RUN apt-get install -y liblzma-dev
 
 # Install bioconductor
 RUN R --slave -e 'install.packages("BiocManager", lib="/usr/local/lib/R/site-library")'
-RUN R --slave -e 'BiocManager::install(version="3.19", ask = FALSE, lib="/usr/local/lib/R/site-library")'
+RUN R --slave -e 'BiocManager::install(version="3.21", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 
 # Install R packages
 RUN R --slave -e 'BiocManager::install("AnnotationHub", ask = FALSE, lib="/usr/local/lib/R/site-library")'
