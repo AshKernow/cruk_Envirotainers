@@ -25,24 +25,24 @@ velociraptor).
 # 3. Build the Docker image
 
 ```
-version=4.4.1
+version=4.5.0
 sudo docker build -t scrnaseq_rstudio:v${version} .
 ```
 
 # 3. Build the Singularity image
 
 ```
-version=4.4.1
+version=4.5.0
 sudo singularity build rstudio_scRNAseq_${version}.sif docker-daemon://scrnaseq_rstudio:v${version}
 ```
---> rstudio_scRNAseq_4.4.1.sif
+--> rstudio_scRNAseq_4.5.0.sif
 
 # 4. Check package installation
 
 Just check all the packages are installed.
 
 ```
-singularity exec rstudio_scRNAseq_4.4.1.sif ./xrCheckPackages.R 
+singularity exec rstudio_scRNAseq_4.5.0.sif ./xrCheckPackages.R 
 ```
 
 # 5. Test the image
@@ -50,7 +50,7 @@ singularity exec rstudio_scRNAseq_4.4.1.sif ./xrCheckPackages.R
 Copy the server test directory to the scratch space
 
 ```
-cp rstudio_scRNAseq_4.4.1.sif rstudio_server_test/rs_images/.
+cp rstudio_scRNAseq_4.5.0.sif rstudio_server_test/rs_images/.
 cp -pvr rstudio_server_test ~/CScratch/.
 ```
 
