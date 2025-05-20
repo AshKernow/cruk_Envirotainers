@@ -8,6 +8,7 @@ Cairo
 cluster
 clustree
 cowplot
+devtools
 DropletUtils
 DT
 dynamicTreeCut
@@ -21,10 +22,12 @@ knitr
 leiden
 miloR
 NbClust
+pak
 patchwork
 PCAtools
 pheatmap
 RColorBrewer
+remotes
 robustbase
 scater
 scran
