@@ -2,8 +2,8 @@
 #SBATCH --time=08:00:00
 #SBATCH --signal=USR2
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=8192
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=64G
 #SBATCH --partition epyc
 #SBATCH --output=/home/%u/rstudio-server-cri/rstudio-server.%j.out
 #SBATCH --error=/home/%u/.rstudio-server-cri/rstudio-server.%j.err
@@ -58,7 +58,7 @@ export SINGULARITY_BIND="${workdir}/run:/run,${workdir}/tmp:/tmp,${workdir}/etc/
 export SINGULARITYENV_RSTUDIO_SESSION_TIMEOUT=0
 
 export SINGULARITYENV_USER=$(id -un)
-export SINGULARITYENV_PASSWORD=$(openssl rand -base64 15)
+export SINGULARITYENV_PASSWORD="scRstudio"
 # get unused socket per https://unix.stackexchange.com/a/132524
 # tiny race condition between the python & singularity commands
 readonly PORT=$(python3 -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()')

@@ -1,9 +1,10 @@
 #!/bin/bash
 
-TESTDIR=/mnt/scratchc/bioinformatics/sawle01/rstudio_server_test
+projDir=/mnt/scratchc/bioinformatics/sawle01/Scripts/cruk_Envirotainers/apptainer_images/scRNAseq_rstudio
+rsDir=${projDir}/software/rstudio_server
 
-SBATCH=${TESTDIR}/rstudio-server.sbatch
-IMAGE_DIR=${TESTDIR}/rs_images
+SBATCH=${rsDir}/rstudio-server.sbatch
+IMAGE_DIR=${rsDir}
 export RSTUDIO_WORK_DIR=~/.rstudio-server-cri
 
 # Make the local working dir
@@ -22,15 +23,10 @@ cleanup() {
 
 ARGS="$@"
 
-echo -e "CRUK Rstudio Server\n\nPlease select a base image to run:\n"
-select ITEM in $(for image in $IMAGE_DIR/*; do basename $image; done)
-do
-    echo -e "$ITEM selected, starting slurm job..."
-    export RSTUDIO_SERVER_IMAGE="$IMAGE_DIR/$ITEM"
-    RES=$(sbatch --output=$RSTUDIO_WORK_DIR/rstudio-server-out.%j --error=$RSTUDIO_WORK_DIR/rstudio-server-err.%j $ARGS $SBATCH)
-    JOBNO=${RES##* }
-    break
-done
+rsImage=`ls ${IMAGE_DIR}/*.sif`
+export RSTUDIO_SERVER_IMAGE="$rsImage"
+RES=$(sbatch --output=$RSTUDIO_WORK_DIR/rstudio-server-out.%j --error=$RSTUDIO_WORK_DIR/rstudio-server-err.%j $ARGS $SBATCH)
+JOBNO=${RES##* }
 
 # Wait for job to be scheduled
 echo -e "Waiting for job $JOBNO to start"
