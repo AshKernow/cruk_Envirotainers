@@ -60,3 +60,9 @@ RUN R --slave -e 'BiocManager::install("velociraptor", ask = FALSE, lib="/usr/lo
 RUN apt-get install -y libgdal-dev libgeos-dev libproj-dev
 #RUN R --slave -e 'BiocManager::install("terra", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 RUN R --slave -e 'pak::pkg_install("drieslab/Giotto")'
+
+# Run a basic scVelo in order to set up the conda environment
+COPY xrSCvelo.R /tmp/xrSCvelo.R
+RUN Rscript /tmp/xrSCvelo.R
+# Remove the script after running it
+RUN rm /tmp/xrSCvelo.R
