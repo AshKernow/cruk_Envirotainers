@@ -34,6 +34,7 @@ scran
 sctransform
 scuttle
 Seurat
+singleCellTK
 slingshot
 tidyverse
 tradeSeq
