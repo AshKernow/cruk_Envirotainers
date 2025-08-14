@@ -1,0 +1,25 @@
+Build a container with R and various packages needed for proteomics analysis.
+The container is based on the rocker/r-base image.
+
+# 1. Modify the Dockerfile to install the software
+
+* modify the rocker/r-base version to match the version of R that is required.
+* modify the Bioconductor version to match the version of R that is required.
+* Add any new packages.
+
+# 2. Build the Docker image
+
+```
+version=4.5.1
+sudo docker build -t r_base:v${version} .
+
+docker start scrnaseq_rstudio
+```
+
+# 3. Build the Singularity image
+
+```
+version=4.5.1
+sudo singularity build r_base_${version}.sif docker-daemon://r_base:v${version}
+```
+--> rstudio_scRNAseq_4.5.1.sif
