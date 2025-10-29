@@ -1,0 +1,13 @@
+name: scRNAseq_R 
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+  - r
+dependencies:
+  - ca-certificates
+  - openssl
+  - radian
+  - r-base=4.5.1
+  - r-tidyverse
+  - r-biocmanager
