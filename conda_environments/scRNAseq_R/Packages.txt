@@ -18,8 +18,8 @@ knitr
 kableExtra
 MAST
 miloR
-org.mm.eg.db
-org.mm.eg.db
+org.Mm.eg.db
+org.Hs.eg.db
 patchwork
 pheatmap
 readxl
