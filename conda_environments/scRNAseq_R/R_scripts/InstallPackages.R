@@ -8,16 +8,9 @@ library(stringr)
 
 installPackage <- function(pkg) {
     message("Attempting to install package ", pkg)
-    status <- tryCatch({
-        BiocManager::install(pkg, ask = FALSE)
-        test <- require(pkg)
-        status <- ifelse(test, "success", "fail")
-        library(pkg)
-    }, error = function(e) {
-        message("ERROR: FAILED TO INSTALL PACKAGE ", pkg)
-        message(conditionMessage(e))
-        return("FAILED")
-    })
+    BiocManager::install(pkg, ask = FALSE)
+    test <- require(pkg)
+    status <- ifelse(test, "success", "fail")
     message("----------------------------------------\n")
     str_c(pkg, ": ", status)
 }
