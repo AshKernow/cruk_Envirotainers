@@ -11,7 +11,7 @@ The container is based on the rocker/r-base image.
 
 ```
 version=4.5.1
-sudo docker build -t r_base:v${version} .
+sudo docker build -t qplexanalyzer:r${version} .
 
 docker start scrnaseq_rstudio
 ```
@@ -20,6 +20,6 @@ docker start scrnaseq_rstudio
 
 ```
 version=4.5.1
-sudo singularity build r_base_${version}.sif docker-daemon://r_base:v${version}
+sudo singularity build qPLEXanalyzer_r${version}.sif docker-daemon://qplexanalyzer:r${version}
 ```
---> rstudio_scRNAseq_4.5.1.sif
+--> qPLEXanalyzer_r4.5.1.sif

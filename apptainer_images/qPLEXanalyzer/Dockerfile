@@ -6,6 +6,7 @@ RUN apt-get update && \
 # Additional libraries needed by R packages
 RUN apt-get install -y libxt-dev
 RUN apt-get install -y liblzma-dev 
+RUN apt-get install -y libnetcdf-dev
 
 # Install bioconductor
 RUN R --slave -e 'install.packages("BiocManager", lib="/usr/local/lib/R/site-library")'
@@ -26,6 +27,11 @@ RUN R --slave -e 'BiocManager::install("tidyverse", ask = FALSE, lib="/usr/local
 RUN R --slave -e 'BiocManager::install("Biostrings", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 RUN R --slave -e 'BiocManager::install("qPLEXanalyzer", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 RUN R --slave -e 'BiocManager::install("readxl", ask = FALSE, lib="/usr/local/lib/R/site-library")'
+RUN R --slave -e 'BiocManager::install("ncdf4", ask = FALSE, lib="/usr/local/lib/R/site-library")'
+RUN R --slave -e 'BiocManager::install("stringi", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 
 
 # End R packages
+RUN ln -sf /usr/lib/x86_64-linux-gnu/libnetcdf.so /usr/lib/x86_64-linux-gnu/libnetcdf.so.19
+RUN ln -sf /usr/lib/x86_64-linux-gnu/libicui18n.so /usr/lib/x86_64-linux-gnu/libicui18n.so.74
+RUN ln -sf /usr/lib/x86_64-linux-gnu/libicuuc.so /usr/lib/x86_64-linux-gnu/libicuuc.so.74
