@@ -26,6 +26,7 @@ org.Hs.eg.db
 patchwork
 pheatmap
 readxl
+rmarkdown
 Seurat
 SeuratObject
 SingleCellExperiment
