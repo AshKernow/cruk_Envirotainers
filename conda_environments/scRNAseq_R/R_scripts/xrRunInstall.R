@@ -16,3 +16,4 @@ sink(con, append = TRUE, type = "message")
 
 # This will echo all input and not truncate 150+ character lines...
 source("R_scripts/InstallPackages.R", echo = TRUE, max.deparse.length = 10000)
+

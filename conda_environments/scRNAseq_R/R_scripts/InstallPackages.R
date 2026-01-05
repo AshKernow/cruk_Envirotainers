@@ -24,3 +24,5 @@ pkgs <- setdiff(packages, rownames(installed.packages()))
 # Loop through and install each package
 map_chr(pkgs, installPackage)
 
+# Install sceasy from Github
+devtools::install_github("cellgeni/sceasy")

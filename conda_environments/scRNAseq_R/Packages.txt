@@ -1,3 +1,4 @@
+ashr
 BiocParallel
 DESeq2
 DT
@@ -16,13 +17,18 @@ ggrepel
 ggvenn
 knitr
 kableExtra
+LoomExperiment
 MAST
 miloR
+optparse
 org.Mm.eg.db
 org.Hs.eg.db
 patchwork
 pheatmap
 readxl
+Seurat
+SeuratObject
+SingleCellExperiment
 scater
 scran
 svglite

@@ -8,6 +8,7 @@ dependencies:
   - ca-certificates
   - openssl
   - radian
+  - quarto
   - r-base=4.5.1
   - r-tidyverse
   - r-biocmanager
@@ -15,3 +16,4 @@ dependencies:
   - r-igraph
   - r-cairo
   - r-xml
+  - r-sceasy
