@@ -9,6 +9,7 @@ dependencies:
   - openssl
   - radian
   - quarto
+  - zlib
   - r-base=4.5.1
   - r-tidyverse
   - r-biocmanager
