@@ -17,3 +17,5 @@ dependencies:
   - r-igraph
   - r-cairo
   - r-xml
+  - r-magick
+  - r-msigdbr
