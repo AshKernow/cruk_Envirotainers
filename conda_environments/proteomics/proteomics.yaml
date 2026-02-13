@@ -1,0 +1,22 @@
+name: proteomics
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - quarto
+  - zlib
+  - r-base=4.5.2
+  - r-tidyverse
+  - r-readxl 
+  - r-patchwork
+  - r-knitr
+  - r-kableextra
+  - r-dt
+  - r-xml2
+  - r-ncdf4
+  - r-igraph
+  - r-cairo
+  - r-xml
+  - r-devtools
+  - r-biocmanager
