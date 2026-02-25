@@ -20,3 +20,4 @@ dependencies:
   - r-xml
   - r-devtools
   - r-biocmanager
+  - r-ggrepel
