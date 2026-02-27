@@ -32,7 +32,7 @@ check-logs:
 		echo ""; \
 		echo "✅ All packages installed successfully!"; \
 		echo "Cleaning up log files..."; \
-		#rm -rf AllPackageInstallationLogs AllPackageInstallationSummary.log; \
+		rm -rf AllPackageInstallationLogs AllPackageInstallationSummary.log; \
 		echo "Done."; \
 		echo ""; \
 	fi
