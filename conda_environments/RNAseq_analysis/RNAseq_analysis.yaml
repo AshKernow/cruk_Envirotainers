@@ -50,6 +50,7 @@ dependencies:
   - dash=3.2.0          
   - decoupler-py=2.1.1  
   - harmonypy=0.0.10    
+  - itables
   - leidenalg=0.10.2    
   - matplotlib=3.10.6   
   - notebook=7.4.7      
