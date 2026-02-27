@@ -1,28 +1,39 @@
 #!/usr/bin/env Rscript
 
-library(purrr)
-library(stringr)
-
-# Install the package but exit with error if the package install
-# fails.
-
-installPackage <- function(pkg) {
-    message("Attempting to install package ", pkg)
-    BiocManager::install(pkg, ask = FALSE)
-    test <- require(pkg)
-    status <- ifelse(test, "success", "fail")
-    message("----------------------------------------\n")
-    str_c(pkg, ": ", status)
+pkg <- commandArgs(trailingOnly = TRUE)[1]
+if( is.na(pkg) ) {
+  stop("No package specified. Usage: Rscript xrInstallPackage.R <package_name>")
 }
 
-# Read the list of packages from the file and loop through
-packages <- read_lines("Packages.txt")
+# First check if the package is already installed
+checkPackage <- function(pack) {
+    suppressPackageStartupMessages(
+        require(pack, character.only=TRUE, quietly=TRUE)
+    )
+}
+pkgNam <- gsub(".*/", "", pkg) # extract the package name in case it is a GitHub repo string
+pkgInstalled <- checkPackage(pkgNam)
 
-# Remove any that are already installed
-pkgs <- setdiff(packages, rownames(installed.packages()))
+# Next check if the package is to be installed from GitHub - it will have a "/" in the name
+gitHub <- grepl("/", pkg)
+# If not installed, attempt to install the package using BiocManager
+if(!pkgInstalled) {
+    message("Attempting to install package ", pkgNam)
+    # if not GitHub, install using BiocManager
+    if(!gitHub) {
+        BiocManager::install(pkg, ask = FALSE) 
+    } else {
+        # if GitHub, install using devtools
+        tryCatch({
+            devtools::install_github(pkg)
+        }, error = function(e) {
+            warning("Failed to install ", pkg, " from GitHub: ", e$message)
+        })
+    }
+    test <- checkPackage(pkgNam)
+    status <- ifelse(test, "success", "FAILURE")
+} else {
+    status <- "already installed"
+}
 
-# Loop through and install each package
-map_chr(pkgs, installPackage)
-
-# Install sceasy from Github
-devtools::install_github("cellgeni/sceasy")
+message("%% ", pkgNam, ": ", status)
