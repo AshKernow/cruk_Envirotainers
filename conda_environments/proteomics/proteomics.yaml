@@ -21,3 +21,4 @@ dependencies:
   - r-devtools
   - r-biocmanager
   - r-ggrepel
+  - r-ragg
