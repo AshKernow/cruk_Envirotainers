@@ -13,5 +13,5 @@ fi
 # Install BiocManager if not already installed
 Rscript -e "if (!requireNamespace('BiocManager', quietly=TRUE)) install.packages('BiocManager', repos='https://cloud.r-project.org/')"
 # Install Bioconductor packages
-Rscript -e "BiocManager::install(c('qPLEXanalyzer'), ask=FALSE, update=TRUE)"
-Rscript -e "BiocManager::install(c('MSstatsTMT', 'MSstatsPTM), ask=FALSE, update=TRUE)"
+Rscript -e "BiocManager::install(c('qPLEXanalyzer'), ask=FALSE, update=FALSE)"
+Rscript -e "BiocManager::install(c('MSstatsTMT', 'MSstatsPTM'), ask=FALSE, update=FALSE)"
