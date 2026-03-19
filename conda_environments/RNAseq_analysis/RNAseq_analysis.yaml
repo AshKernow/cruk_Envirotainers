@@ -56,6 +56,7 @@ dependencies:
   - notebook=7.4.7      
   - numba=0.62.1        
   - numpy=2.3.3         
+  - papermill=2.7.0
   - pandas=2.3.3        
   - pertpy=1.0.4
   - pip=25.2            
