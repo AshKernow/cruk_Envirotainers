@@ -20,6 +20,7 @@ dependencies:
   - r-circlize
   - r-devtools
   - r-dt
+  - r-fs=1.6.7
   - r-furrr
   - r-ggdendro
   - r-ggfortify
@@ -32,7 +33,9 @@ dependencies:
   - r-knitr
   - r-magick
   - r-msigdbr
+  - r-nmf
   - r-optparse
+  - r-pak
   - r-patchwork
   - r-pheatmap
   - r-readxl

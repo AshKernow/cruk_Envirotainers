@@ -1,7 +1,10 @@
-.PHONY: all create-env install-packages check-logs clean help
+.PHONY: all create-env update-packages install-packages check-logs clean help
+
+CRAN_MIRROR ?= https://cloud.r-project.org
+R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
 # Default target
-all: create-env install-packages check-logs
+all: create-env update-packages install-packages check-logs
 
 # Create conda environment from YAML file
 create-env:
@@ -13,6 +16,13 @@ create-env:
 		mamba env create -f RNAseq_analysis.yaml; \
 	fi
 	@echo "Conda environment ready."
+
+# Update installed R packages in the conda environment
+update-packages:
+	@echo "Updating installed R packages in 'RNAseq'..."
+	@mkdir -p AllPackageInstallationLogs
+	@conda run -n RNAseq Rscript xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
+	@echo "R package update complete. Log: $(R_UPDATE_LOG)"
 
 # Install Bioconductor packages
 install-packages:
@@ -46,8 +56,9 @@ clean:
 # Help target
 help:
 	@echo "Available targets:"
-	@echo "  all            - Create environment and install all packages (default)"
+	@echo "  all            - Create/update environment, update packages, then install Bioconductor packages (default)"
 	@echo "  create-env     - Create/update the conda environment"
+	@echo "  update-packages - Update installed R packages in RNAseq and write update log"
 	@echo "  install-packages - Install Bioconductor packages"
 	@echo "  check-logs     - Check logs for failures and clean up if successful"
 	@echo "  clean          - Remove log files"

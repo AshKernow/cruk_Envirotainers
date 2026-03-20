@@ -1,15 +1,11 @@
 #!/bin/bash
 
-# Activate the conda environment
-condaBin=$(dirname $(dirname $(which conda)))/bin
-source ${condaBin}/activate RNAseq
-
 # Run the installation script
 packages=($(grep -v "^#" PackagesToInstall.txt))
 numPackages=${#packages[@]}
 logDir="AllPackageInstallationLogs"
 mkdir -p ${logDir}
-for pkgNum in $(seq 0 $((numPackages-1))); do
+for pkgNum in $(seq 1 ${numPackages}); do
     pkg=${packages[$pkgNum]}
     printf -v numPad "%02d" ${pkgNum}
     # fix pakage name in case it is a github repo
@@ -17,7 +13,7 @@ for pkgNum in $(seq 0 $((numPackages-1))); do
     logFile="${logDir}/${numPad}_PackageInstallation_${pkgNam}.log"
     echo "Installing package: $pkg"
     echo "Installing package: $pkg" > ${logFile}
-    ./xrInstallPackage.R $pkg >> ${logFile} 2>&1
+	conda run -n RNAseq Rscript xrInstallPackage.R $pkg >> ${logFile} 2>&1
 done
 
 cat ${logDir}/*.log | 

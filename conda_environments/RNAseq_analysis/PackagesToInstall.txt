@@ -33,3 +33,5 @@ tximport
 velociraptor
 # From GitHub
 cellgeni/sceasy
+jinworks/CellChat
+jinworks/SpatialCellChat

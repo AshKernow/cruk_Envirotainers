@@ -14,6 +14,10 @@ checkPackage <- function(pack) {
 pkgNam <- gsub(".*/", "", pkg) # extract the package name in case it is a GitHub repo string
 pkgInstalled <- checkPackage(pkgNam)
 
+# Avoid Linux binary packages that may require newer glibc than available on host.
+options(pkgType = "source")
+Sys.setenv(R_PKGTYPE = "source")
+
 # Next check if the package is to be installed from GitHub - it will have a "/" in the name
 gitHub <- grepl("/", pkg)
 # If not installed, attempt to install the package using BiocManager
@@ -23,11 +27,12 @@ if(!pkgInstalled) {
     if(!gitHub) {
         BiocManager::install(pkg, ask = FALSE) 
     } else {
-        # if GitHub, install using devtools
+        # if GitHub, try pak first, then fall back to remotes install from source.
         tryCatch({
-            devtools::install_github(pkg)
+            pak::pak(pkg)
         }, error = function(e) {
-            warning("Failed to install ", pkg, " from GitHub: ", e$message)
+            warning("Failed to install ", pkg, " with pak: ", e$message)
+            remotes::install_github(pkg, dependencies = TRUE, upgrade = "never")
         })
     }
     test <- checkPackage(pkgNam)
