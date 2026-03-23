@@ -5,7 +5,7 @@ packages=($(grep -v "^#" PackagesToInstall.txt))
 numPackages=${#packages[@]}
 logDir="AllPackageInstallationLogs"
 mkdir -p ${logDir}
-for pkgNum in $(seq 1 ${numPackages}); do
+for pkgNum in $(seq 0 $((numPackages - 1))); do
     pkg=${packages[$pkgNum]}
     printf -v numPad "%02d" ${pkgNum}
     # fix pakage name in case it is a github repo
