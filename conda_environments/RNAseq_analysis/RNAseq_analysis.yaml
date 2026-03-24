@@ -16,6 +16,7 @@ dependencies:
   - r-base=4.5.2
   # R packages - CRAN only!
   - r-biocmanager
+  - r-bsicons
   - r-cairo
   - r-circlize
   - r-devtools
