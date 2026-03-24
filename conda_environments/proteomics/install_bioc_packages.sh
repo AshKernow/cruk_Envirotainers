@@ -1,7 +1,7 @@
 #!/bin/bash
 
-condaBin=/mnt/scratchc/bioinformatics/sawle01/software/miniforge3/bin
-#condaBin=/home/sawle01/miniforge3/bin
+#condaBin=/mnt/scratchc/bioinformatics/sawle01/software/miniforge3/bin
+condaBin=/home/sawle01/miniforge3/bin
 CondaEnvName=proteomics
 source ${condaBin}/activate ${CondaEnvName} 
 # check if the conda environment is activated
@@ -15,3 +15,7 @@ Rscript -e "if (!requireNamespace('BiocManager', quietly=TRUE)) install.packages
 # Install Bioconductor packages
 Rscript -e "BiocManager::install(c('qPLEXanalyzer'), ask=FALSE, update=FALSE)"
 Rscript -e "BiocManager::install(c('MSstatsTMT', 'MSstatsPTM'), ask=FALSE, update=FALSE)"
+Rscript -e "BiocManager::install(c('Qfeatures', 'SummarizedExperiment'), ask=FALSE, update=FALSE)"
+Rscript -e "BiocManager::install(c('pRoloc', 'QFeatures', 'pRolocGUI'), ask=FALSE, update=FALSE)"
+Rscript -e "BiocManager::install('clusterProfiler', ask=FALSE, update=FALSE)"
+

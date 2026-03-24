@@ -6,6 +6,7 @@ channels:
 dependencies:
   - quarto
   - zlib
+  - r-arrow
   - r-base=4.5.2
   - r-tidyverse
   - r-readxl 
@@ -22,3 +23,5 @@ dependencies:
   - r-biocmanager
   - r-ggrepel
   - r-ragg
+  - r-rtsne
+  - r-eulerr
