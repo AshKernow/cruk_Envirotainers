@@ -35,3 +35,5 @@ velociraptor
 cellgeni/sceasy
 jinworks/CellChat
 immunogenomics/presto
+saeyslab/nichenetr
+saeyslab/multinichenetr
