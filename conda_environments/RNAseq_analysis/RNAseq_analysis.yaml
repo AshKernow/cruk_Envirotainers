@@ -5,7 +5,7 @@ channels:
   - defaults
   - r
 dependencies:
-  - salmon
+  - salmon=1.10.3
   - multiqc
   - picard
   - ca-certificates
@@ -49,6 +49,8 @@ dependencies:
   - r-upsetr
   - r-xml
   - r-xml2
+  # R package - Bioconductor
+  - bioconductor-gviz
   # Python stuff
   - celltypist=1.7.1    
   - dash=3.2.0          
