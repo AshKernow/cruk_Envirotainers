@@ -5,6 +5,7 @@ channels:
   - defaults
   - r
 dependencies:
+  - fastqc
   - salmon=1.10.3
   - multiqc
   - picard
