@@ -12,6 +12,7 @@ ExperimentHub
 GenomicAlignments
 GenomicFeatures
 GenomicRanges
+glmGamPoi
 GSVA
 Gviz
 limma
