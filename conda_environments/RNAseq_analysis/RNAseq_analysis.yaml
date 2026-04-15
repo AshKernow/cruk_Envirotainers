@@ -40,13 +40,16 @@ dependencies:
   - r-pak
   - r-patchwork
   - r-pheatmap
+  - r-quarto
   - r-readxl
   - r-rmarkdown
+  - r-pagedown
   - r-seurat
   - r-seuratobject
   - r-svglite
   - r-tidyverse
   - r-umap
+  - r-units
   - r-upsetr
   - r-xml
   - r-xml2
