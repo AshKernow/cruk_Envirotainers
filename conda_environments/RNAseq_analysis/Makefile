@@ -1,5 +1,8 @@
 .PHONY: all create-env update-packages install-packages check-logs clean help
 
+SHELL := /bin/bash
+.SHELLFLAGS := -lc
+
 CRAN_MIRROR ?= https://cloud.r-project.org
 R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
@@ -12,7 +15,7 @@ create-env:
 	@if conda env list | grep -q "^RNAseq "; then \
 		echo "Environment 'RNAseq' already exists. Updating..."; \
 		mamba env update -f RNAseq_analysis.yaml --prune; \
-	else \
+	 else \
 		mamba env create -f RNAseq_analysis.yaml; \
 	fi
 	@echo "Conda environment ready."
