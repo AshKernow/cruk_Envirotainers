@@ -1,4 +1,4 @@
-.PHONY: all create-env-r create-env-python fix-cxx-standard update-packages install-packages check-logs clean help
+.PHONY: all create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs clean help
 
 SHELL := /bin/bash
 .SHELLFLAGS := -lc
@@ -7,7 +7,7 @@ CRAN_MIRROR ?= https://cloud.r-project.org
 R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
 # Default target
-all: create-env-r create-env-python fix-cxx-standard update-packages install-packages check-logs
+all: create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs
 
 # Create/update R conda environment
 create-env-r:
@@ -19,6 +19,17 @@ create-env-r:
 		mamba env create -f RNAseq_R.yaml; \
 	fi
 	@echo "Conda environment 'RNAseq_R' ready."
+
+# Create/update CLI tools conda environment
+create-env-tools:
+	@echo "Creating conda environment 'RNAseq_Tools'..."
+	@if conda env list | grep -q "^RNAseq_Tools "; then \
+		echo "Environment 'RNAseq_Tools' already exists. Updating..."; \
+		mamba env update -f RNAseq_Tools.yaml --prune; \
+	else \
+		mamba env create -f RNAseq_Tools.yaml; \
+	fi
+	@echo "Conda environment 'RNAseq_Tools' ready."
 
 # Create/update Python conda environment
 create-env-python:
@@ -82,9 +93,10 @@ clean:
 # Help target
 help:
 	@echo "Available targets:"
-	@echo "  all              - Create/update both environments, update R packages, install GitHub packages (default)"
-	@echo "  create-env-r     - Create/update the RNAseq_R conda environment"
+	@echo "  all               - Create/update all environments, update R packages, install GitHub packages (default)"
+	@echo "  create-env-r      - Create/update the RNAseq_R conda environment"
 	@echo "  create-env-python - Create/update the RNAseq_Python conda environment"
+	@echo "  create-env-tools  - Create/update the RNAseq_Tools conda environment (fastqc, salmon, multiqc, picard)"
 	@echo "  update-packages  - Update installed R packages in RNAseq_R and write update log"
 	@echo "  install-packages - Install GitHub-only R packages (PackagesToInstall.txt)"
 	@echo "  fix-cxx-standard - Set CXX11STD=C++14 in RNAseq_R's R Makeconf (fixes RcppArmadillo build)"

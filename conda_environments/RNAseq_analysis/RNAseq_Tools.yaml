@@ -1,0 +1,14 @@
+name: RNAseq_Tools
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - ca-certificates
+  - openssl
+  - zlib
+  # Bioinformatics CLI tools
+  - fastqc
+  - multiqc
+  - picard
+  - salmon=1.10.3
