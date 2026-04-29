@@ -1,4 +1,4 @@
-.PHONY: all create-env update-packages install-packages check-logs clean help
+.PHONY: all create-env-r create-env-python fix-cxx-standard update-packages install-packages check-logs clean help
 
 SHELL := /bin/bash
 .SHELLFLAGS := -lc
@@ -7,29 +7,52 @@ CRAN_MIRROR ?= https://cloud.r-project.org
 R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
 # Default target
-all: create-env update-packages install-packages check-logs
+all: create-env-r create-env-python fix-cxx-standard update-packages install-packages check-logs
 
-# Create conda environment from YAML file
-create-env:
-	@echo "Creating conda environment 'RNAseq'..."
-	@if conda env list | grep -q "^RNAseq "; then \
-		echo "Environment 'RNAseq' already exists. Updating..."; \
-		mamba env update -f RNAseq_analysis.yaml --prune; \
-	 else \
-		mamba env create -f RNAseq_analysis.yaml; \
+# Create/update R conda environment
+create-env-r:
+	@echo "Creating conda environment 'RNAseq_R'..."
+	@if conda env list | grep -q "^RNAseq_R "; then \
+		echo "Environment 'RNAseq_R' already exists. Updating..."; \
+		mamba env update -f RNAseq_R.yaml --prune; \
+	else \
+		mamba env create -f RNAseq_R.yaml; \
 	fi
-	@echo "Conda environment ready."
+	@echo "Conda environment 'RNAseq_R' ready."
+
+# Create/update Python conda environment
+create-env-python:
+	@echo "Creating conda environment 'RNAseq_Python'..."
+	@if conda env list | grep -q "^RNAseq_Python "; then \
+		echo "Environment 'RNAseq_Python' already exists. Updating..."; \
+		mamba env update -f RNAseq_Python.yaml --prune; \
+	else \
+		mamba env create -f RNAseq_Python.yaml; \
+	fi
+	@echo "Conda environment 'RNAseq_Python' ready."
+
+# Ensure R uses C++14 when compiling packages that declare C++11 (required by newer RcppArmadillo)
+fix-cxx-standard:
+	@MAKECONF=$$(conda run -n RNAseq_R Rscript -e "cat(file.path(R.home('etc'), 'Makeconf'))"); \
+	if grep -q "^CXX11STD" "$$MAKECONF"; then \
+		echo "WARNING: CXX11STD already set in $$MAKECONF — skipping."; \
+	else \
+		echo "WARNING: Appending 'CXX11STD = -std=gnu++14' to $$MAKECONF"; \
+		echo "WARNING: This overrides the C++11 standard flag to C++14, required by RcppArmadillo."; \
+		echo "CXX11STD = -std=gnu++14" >> "$$MAKECONF"; \
+		echo "WARNING: Done — CXX11STD written to $$MAKECONF"; \
+	fi
 
 # Update installed R packages in the conda environment
 update-packages:
-	@echo "Updating installed R packages in 'RNAseq'..."
+	@echo "Updating installed R packages in 'RNAseq_R'..."
 	@mkdir -p AllPackageInstallationLogs
-	@conda run -n RNAseq Rscript xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
+	@conda run -n RNAseq_R Rscript xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
 	@echo "R package update complete. Log: $(R_UPDATE_LOG)"
 
-# Install Bioconductor packages
+# Install GitHub R packages
 install-packages:
-	@echo "Installing Bioconductor packages..."
+	@echo "Installing GitHub R packages..."
 	@./xInstallPackages.sh
 
 # Check logs for failures and clean up if successful
@@ -59,10 +82,12 @@ clean:
 # Help target
 help:
 	@echo "Available targets:"
-	@echo "  all            - Create/update environment, update packages, then install Bioconductor packages (default)"
-	@echo "  create-env     - Create/update the conda environment"
-	@echo "  update-packages - Update installed R packages in RNAseq and write update log"
-	@echo "  install-packages - Install Bioconductor packages"
-	@echo "  check-logs     - Check logs for failures and clean up if successful"
-	@echo "  clean          - Remove log files"
-	@echo "  help           - Show this help message"
+	@echo "  all              - Create/update both environments, update R packages, install GitHub packages (default)"
+	@echo "  create-env-r     - Create/update the RNAseq_R conda environment"
+	@echo "  create-env-python - Create/update the RNAseq_Python conda environment"
+	@echo "  update-packages  - Update installed R packages in RNAseq_R and write update log"
+	@echo "  install-packages - Install GitHub-only R packages (PackagesToInstall.txt)"
+	@echo "  fix-cxx-standard - Set CXX11STD=C++14 in RNAseq_R's R Makeconf (fixes RcppArmadillo build)"
+	@echo "  check-logs       - Check logs for failures and clean up if successful"
+	@echo "  clean            - Remove log files"
+	@echo "  help             - Show this help message"

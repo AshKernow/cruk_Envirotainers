@@ -13,7 +13,7 @@ for pkgNum in $(seq 0 $((numPackages - 1))); do
     logFile="${logDir}/${numPad}_PackageInstallation_${pkgNam}.log"
     echo "Installing package: $pkg"
     echo "Installing package: $pkg" > ${logFile}
-	conda run -n RNAseq Rscript xrInstallPackage.R $pkg >> ${logFile} 2>&1
+	conda run -n RNAseq_R Rscript xrInstallPackage.R $pkg >> ${logFile} 2>&1
 done
 
 cat ${logDir}/*.log | 

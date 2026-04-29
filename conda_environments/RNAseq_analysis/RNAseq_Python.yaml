@@ -1,0 +1,36 @@
+name: RNAseq_Python
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13.7
+  - pip=25.2
+  - ca-certificates
+  - openssl
+  - zlib
+  # Reporting
+  - quarto=1.8.25
+  # Python packages
+  - celltypist=1.7.1
+  - dash=3.2.0
+  - decoupler-py=2.1.1
+  - harmonypy=0.0.10
+  - itables
+  - leidenalg=0.10.2
+  - matplotlib=3.10.6
+  - notebook=7.4.7
+  - numba=0.62.1
+  - numpy=2.3.3
+  - papermill=2.7.0
+  - pandas=2.3.3
+  - pertpy=1.0.4
+  - plotly=6.3.1
+  - python-igraph=0.11.9
+  - scanpy=1.11.4
+  - scikit-image=0.25.2
+  - scikit-misc=0.5.1
+  - scvi-tools=1.4.0
+  - pip:
+    - session_info
+    - infercnvpy==0.6.1
