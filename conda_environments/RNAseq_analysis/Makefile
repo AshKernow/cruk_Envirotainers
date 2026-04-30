@@ -1,4 +1,4 @@
-.PHONY: all create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs clean help
+.PHONY: all create-r create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs clean help
 
 SHELL := /bin/bash
 .SHELLFLAGS := -lc
@@ -9,14 +9,17 @@ R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 # Default target
 all: create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs
 
+# R-only build (skips Python and Tools environments)
+create-r: create-env-r fix-cxx-standard update-packages install-packages check-logs
+
 # Create/update R conda environment
 create-env-r:
 	@echo "Creating conda environment 'RNAseq_R'..."
 	@if conda env list | grep -q "^RNAseq_R "; then \
 		echo "Environment 'RNAseq_R' already exists. Updating..."; \
-		mamba env update -f RNAseq_R.yaml --prune; \
+		mamba env update -f RNAseq_R.yaml --prune --yes; \
 	else \
-		mamba env create -f RNAseq_R.yaml; \
+		mamba env create -f RNAseq_R.yaml --yes; \
 	fi
 	@echo "Conda environment 'RNAseq_R' ready."
 
@@ -25,9 +28,9 @@ create-env-tools:
 	@echo "Creating conda environment 'RNAseq_Tools'..."
 	@if conda env list | grep -q "^RNAseq_Tools "; then \
 		echo "Environment 'RNAseq_Tools' already exists. Updating..."; \
-		mamba env update -f RNAseq_Tools.yaml --prune; \
+		mamba env update -f RNAseq_Tools.yaml --prune --yes; \
 	else \
-		mamba env create -f RNAseq_Tools.yaml; \
+		mamba env create -f RNAseq_Tools.yaml --yes; \
 	fi
 	@echo "Conda environment 'RNAseq_Tools' ready."
 
@@ -36,9 +39,9 @@ create-env-python:
 	@echo "Creating conda environment 'RNAseq_Python'..."
 	@if conda env list | grep -q "^RNAseq_Python "; then \
 		echo "Environment 'RNAseq_Python' already exists. Updating..."; \
-		mamba env update -f RNAseq_Python.yaml --prune; \
+		mamba env update -f RNAseq_Python.yaml --prune --yes; \
 	else \
-		mamba env create -f RNAseq_Python.yaml; \
+		mamba env create -f RNAseq_Python.yaml --yes; \
 	fi
 	@echo "Conda environment 'RNAseq_Python' ready."
 
@@ -94,6 +97,7 @@ clean:
 help:
 	@echo "Available targets:"
 	@echo "  all               - Create/update all environments, update R packages, install GitHub packages (default)"
+	@echo "  create-r          - R-only build: create RNAseq_R, fix C++ standard, update and install R packages"
 	@echo "  create-env-r      - Create/update the RNAseq_R conda environment"
 	@echo "  create-env-python - Create/update the RNAseq_Python conda environment"
 	@echo "  create-env-tools  - Create/update the RNAseq_Tools conda environment (fastqc, salmon, multiqc, picard)"

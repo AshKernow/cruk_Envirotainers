@@ -22,9 +22,11 @@ on.exit(close_sinks(), add = TRUE)
 
 cat("R package update log\n")
 cat("Timestamp: ", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z"), "\n", sep = "")
-cat("CRAN mirror: ", cran_mirror, "\n\n", sep = "")
+cat("CRAN mirror: ", cran_mirror, "\n", sep = "")
 
 options(repos = c(CRAN = cran_mirror))
+all_repos <- BiocManager::repositories()
+cat("Repositories: ", paste(names(all_repos), collapse = ", "), "\n\n", sep = "")
 
 update_failed <- FALSE
 update_error <- NULL
@@ -39,7 +41,7 @@ before_versions <- setNames(before[, "Version"], before[, "Package"])
 
 outdated <- tryCatch(
   withCallingHandlers(
-    old.packages(repos = getOption("repos")),
+    old.packages(repos = all_repos, checkBuilt = TRUE),
     warning = log_warning
   ),
   error = function(e) {
@@ -50,9 +52,9 @@ outdated <- tryCatch(
 if (is.null(outdated)) {
   cat("Unable to determine outdated packages before update.\n")
 } else if (nrow(outdated) == 0) {
-  cat("No outdated packages detected before update.\n")
+  cat("No outdated packages detected — all packages are up to date.\n")
 } else {
-  cat("Outdated packages detected before update: ", nrow(outdated), "\n", sep = "")
+  cat("Outdated packages detected: ", nrow(outdated), "\n", sep = "")
   outdated_tbl <- data.frame(
     Package = rownames(outdated),
     Installed = outdated[, "Installed"],
@@ -63,43 +65,77 @@ if (is.null(outdated)) {
   print(outdated_tbl)
 }
 
-cat("\nRunning update.packages(...)\n")
-tryCatch(
-  withCallingHandlers(
-    update.packages(ask = FALSE, checkBuilt = TRUE, repos = getOption("repos")),
-    warning = log_warning
-  ),
-  error = function(e) {
-    update_failed <<- TRUE
-    update_error <<- conditionMessage(e)
-    cat("ERROR during update.packages(): ", update_error, "\n", sep = "")
-    NULL
+pkg_updated   <- character()
+pkg_failed    <- character()
+pkg_unchanged <- character()
+
+if (!is.null(outdated) && nrow(outdated) > 0) {
+  n_pkgs <- nrow(outdated)
+  cat("\nUpdating ", n_pkgs, " package(s)...\n", sep = "")
+  for (i in seq_len(n_pkgs)) {
+    pkg     <- rownames(outdated)[i]
+    old_ver <- outdated[i, "Installed"]
+    new_ver <- outdated[i, "ReposVer"]
+    cat(sprintf("  [%d/%d] %s (%s -> %s)... ", i, n_pkgs, pkg, old_ver, new_ver))
+    this_failed <- FALSE
+    tryCatch(
+      withCallingHandlers(
+        install.packages(pkg, repos = all_repos, quiet = TRUE),
+        warning = log_warning
+      ),
+      error = function(e) {
+        this_failed <<- TRUE
+        update_failed <<- TRUE
+        update_error  <<- conditionMessage(e)
+        cat("FAILED\n")
+        cat("    ERROR: ", conditionMessage(e), "\n", sep = "")
+      }
+    )
+    if (!this_failed) {
+      current_ver <- tryCatch(
+        as.character(packageVersion(pkg)),
+        error = function(e) old_ver
+      )
+      if (current_ver != old_ver) {
+        cat("updated\n")
+        pkg_updated <- c(pkg_updated, pkg)
+      } else {
+        cat("unchanged\n")
+        pkg_unchanged <- c(pkg_unchanged, pkg)
+      }
+    } else {
+      pkg_failed <- c(pkg_failed, pkg)
+    }
   }
-)
+} else {
+  cat("\nNo packages to update.\n")
+}
 
 after <- installed.packages()[, c("Package", "Version"), drop = FALSE]
 after_versions <- setNames(after[, "Version"], after[, "Package"])
 
-common_pkgs <- intersect(names(before_versions), names(after_versions))
-changed_pkgs <- common_pkgs[before_versions[common_pkgs] != after_versions[common_pkgs]]
-
-new_pkgs <- setdiff(names(after_versions), names(before_versions))
+new_pkgs     <- setdiff(names(after_versions), names(before_versions))
 removed_pkgs <- setdiff(names(before_versions), names(after_versions))
 
 cat("\nSummary of changes:\n")
-if (length(changed_pkgs) == 0 && length(new_pkgs) == 0 && length(removed_pkgs) == 0) {
+if (length(pkg_updated) == 0 && length(pkg_failed) == 0 && length(new_pkgs) == 0 && length(removed_pkgs) == 0) {
   cat("No package version changes detected.\n")
 } else {
-  if (length(changed_pkgs) > 0) {
+  if (length(pkg_updated) > 0) {
     changed_tbl <- data.frame(
-      Package = changed_pkgs,
-      Previous = unname(before_versions[changed_pkgs]),
-      Current = unname(after_versions[changed_pkgs]),
+      Package  = pkg_updated,
+      Previous = unname(before_versions[pkg_updated]),
+      Current  = unname(after_versions[pkg_updated]),
       stringsAsFactors = FALSE,
       row.names = NULL
     )
-    cat("Updated packages:\n")
+    cat("Updated packages (" , length(pkg_updated), "):\n", sep = "")
     print(changed_tbl)
+  }
+
+  if (length(pkg_failed) > 0) {
+    cat("Failed packages (", length(pkg_failed), "):\n", sep = "")
+    cat(paste0("  ", pkg_failed, collapse = "\n"), "\n", sep = "")
   }
 
   if (length(new_pkgs) > 0) {
@@ -115,7 +151,7 @@ if (length(changed_pkgs) == 0 && length(new_pkgs) == 0 && length(removed_pkgs) =
 
   if (length(removed_pkgs) > 0) {
     removed_tbl <- data.frame(
-      Package = removed_pkgs,
+      Package  = removed_pkgs,
       Previous = unname(before_versions[removed_pkgs]),
       stringsAsFactors = FALSE,
       row.names = NULL
