@@ -5,23 +5,18 @@ channels:
   - defaults
 dependencies:
   - quarto
-  - zlib
-  - r-arrow
-  - r-base=4.5.2
+  - r-base=4.5.3
   - r-tidyverse
   - r-readxl 
   - r-patchwork
   - r-knitr
   - r-kableextra
   - r-dt
-  - r-xml2
-  - r-ncdf4
-  - r-igraph
-  - r-cairo
-  - r-xml
   - r-devtools
   - r-biocmanager
   - r-ggrepel
-  - r-ragg
-  - r-rtsne
-  - r-eulerr
+  - bioconductor-qplexanalyzer
+  - bioconductor-msstatstmt
+  - bioconductor-qfeatures
+  - bioconductor-proloc
+  - bioconductor-clusterprofiler

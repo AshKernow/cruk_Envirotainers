@@ -1,0 +1,83 @@
+# Proteomics conda environment
+
+This repository contains scripts to create and maintain the `proteomics` conda
+environment and install required R/Bioconductor packages for proteomics analyses.
+
+## What this repository does
+
+1. Creates or updates the `proteomics` conda environment from `proteomics.yaml`.
+   This step installs all R packages via the YAML. This ensures any package
+   dependencies are met and available in the environment.
+1. Updates already installed R packages inside that environment. This ensures
+   all packages are up to date with the latest versions (the conda versions may
+   not always be the latest).
+1. Installs requested Bioconductor/GitHub R packages.
+1. Checks installation logs for failures.
+
+## Main files
+
+1. `Makefile`: Orchestrates environment creation, package updates, and checks.
+1. `proteomics.yaml`: Conda environment definition.
+1. `xInstallPackages.sh`: Iterates through package list and calls R installer.
+1. `xrInstallPackage.R`: Installs individual R packages (Bioconductor/GitHub).
+1. `xUpdateRPackages.R`: Updates installed R packages and writes change logs.
+1. `PackagesToInstall.txt`: Package list consumed by installer scripts.
+
+## Usage
+
+Run the full workflow:
+
+```bash
+make
+```
+
+This runs:
+
+1. `create-env`
+1. `update-packages`
+1. `install-packages`
+1. `check-logs`
+
+### Run steps individually
+
+```bash
+make create-env
+make update-packages
+make install-packages
+make check-logs
+```
+
+## R package update step
+
+The `update-packages` target updates R packages using:
+
+```bash
+conda run -n proteomics Rscript xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
+```
+
+Default values (defined in `Makefile`):
+
+1. `CRAN_MIRROR=https://cloud.r-project.org`
+1. `R_UPDATE_LOG=AllPackageInstallationLogs/00_RPackageUpdate.log`
+
+Override at runtime if needed:
+
+```bash
+make update-packages CRAN_MIRROR=https://cran.rstudio.com
+make update-packages R_UPDATE_LOG=AllPackageInstallationLogs/custom_update.log
+```
+
+## Logs
+
+1. Per-package install logs: `AllPackageInstallationLogs/`
+1. Update summary log: `AllPackageInstallationLogs/00_RPackageUpdate.log`
+1. Overall status summary: `AllPackageInstallationSummary.log`
+
+If `check-logs` finds any `FAILURE`, it exits with error and keeps logs for review.
+If no failures are found, logs are cleaned up.
+
+## Requirements
+
+1. `conda` and `mamba` available in shell.
+1. Network access to the selected CRAN mirror and package sources.
+1. Build tools available for source package compilation when needed.
