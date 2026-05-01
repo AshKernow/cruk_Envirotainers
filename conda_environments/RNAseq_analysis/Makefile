@@ -48,8 +48,12 @@ create-env-python:
 # Ensure R uses C++14 when compiling packages that declare C++11 (required by newer RcppArmadillo)
 fix-cxx-standard:
 	@MAKECONF=$$(conda run -n RNAseq_R Rscript -e "cat(file.path(R.home('etc'), 'Makeconf'))"); \
-	if grep -q "^CXX11STD" "$$MAKECONF"; then \
-		echo "WARNING: CXX11STD already set in $$MAKECONF — skipping."; \
+	if grep -q "^CXX11STD *= *-std=gnu++14" "$$MAKECONF"; then \
+		echo "CXX11STD already set to -std=gnu++14 in $$MAKECONF — skipping."; \
+	elif grep -q "^CXX11STD" "$$MAKECONF"; then \
+		echo "WARNING: CXX11STD found in $$MAKECONF but not set to gnu++14 — overwriting."; \
+		sed -i 's|^CXX11STD.*|CXX11STD = -std=gnu++14|' "$$MAKECONF"; \
+		echo "WARNING: Done — CXX11STD updated to -std=gnu++14 in $$MAKECONF"; \
 	else \
 		echo "WARNING: Appending 'CXX11STD = -std=gnu++14' to $$MAKECONF"; \
 		echo "WARNING: This overrides the C++11 standard flag to C++14, required by RcppArmadillo."; \
