@@ -15,6 +15,7 @@ dependencies:
   - r-devtools
   - r-biocmanager
   - r-ggrepel
+  - r-ggfortify
   - bioconductor-qplexanalyzer
   - bioconductor-msstatstmt
   - bioconductor-qfeatures
