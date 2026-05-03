@@ -1,0 +1,83 @@
+
+> library(purrr)
+
+> library(stringr)
+
+> installPackage <- function(pkg) {
++     message("Attempting to install package ", pkg)
++     BiocManager::install(pkg, ask = FALSE)
++     test <- require(pkg)
++     status <- ifelse(test, "success", "fail")
++     message("----------------------------------------\n")
++     str_c(pkg, ": ", status)
++ }
+
+> packages <- read_lines("Packages.txt")
+
+> pkgs <- setdiff(packages, rownames(installed.packages()))
+
+> map_chr(pkgs, installPackage)
+Attempting to install package qPLEXanalyzer
+Bioconductor version 3.22 (BiocManager 1.30.27), R 4.5.1 (2025-06-13)
+Installing package(s) 'qPLEXanalyzer'
+also installing the dependencies ‘BiocBaseUtils’, ‘MetaboCoreUtils’, ‘MultiAssayExperiment’, ‘AnnotationFilter’, ‘ncdf4’, ‘clue’, ‘Spectra’, ‘QFeatures’, ‘affyio’, ‘doParallel’, ‘foreach’, ‘iterators’, ‘mzR’, ‘ProtGenerics’, ‘MsCoreUtils’, ‘PSMatch’, ‘vsn’, ‘affy’, ‘impute’, ‘pcaMethods’, ‘MALDIquant’, ‘mzID’, ‘MSnbase’, ‘preprocessCore’
+
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/BiocBaseUtils_1.12.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/MetaboCoreUtils_1.18.1.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/MultiAssayExperiment_1.36.1.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/AnnotationFilter_1.34.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/ncdf4_1.24.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/clue_0.3-66.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/Spectra_1.20.1.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/QFeatures_1.20.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/affyio_1.80.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/doParallel_1.0.17.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/foreach_1.5.2.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/iterators_1.0.14.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/mzR_2.44.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/ProtGenerics_1.42.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/MsCoreUtils_1.22.1.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/PSMatch_1.14.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/vsn_3.78.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/affy_1.88.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/impute_1.84.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/pcaMethods_2.2.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/MALDIquant_1.22.3.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/mzID_1.48.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/MSnbase_2.36.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/preprocessCore_1.72.0.tar.gz'
+trying URL 'https://bioconductor.org/packages/3.22/bioc/src/contrib/qPLEXanalyzer_1.27.0.tar.gz'
+
+The downloaded source packages are in
+	‘/tmp/Rtmp7Xwc9g/downloaded_packages’
+Updating HTML index of packages in '.Library'
+Making 'packages.html' ... done
+Loading required package: pkg
+----------------------------------------
+
+[1] "qPLEXanalyzer: fail"
+
+> devtools::install_github("cellgeni/sceasy")
+Skipping install of 'sceasy' from a github remote, the SHA1 (c1c0bf97) has not changed since last install.
+  Use `force = TRUE` to force installation
+Warning messages:
+1: In install.packages(...) :
+  installation of package ‘MultiAssayExperiment’ had non-zero exit status
+2: In install.packages(...) :
+  installation of package ‘foreach’ had non-zero exit status
+3: In install.packages(...) :
+  installation of package ‘mzR’ had non-zero exit status
+4: In install.packages(...) :
+  installation of package ‘QFeatures’ had non-zero exit status
+5: In install.packages(...) :
+  installation of package ‘doParallel’ had non-zero exit status
+6: In install.packages(...) :
+  installation of package ‘mzID’ had non-zero exit status
+7: In install.packages(...) :
+  installation of package ‘PSMatch’ had non-zero exit status
+8: In install.packages(...) :
+  installation of package ‘MSnbase’ had non-zero exit status
+9: In install.packages(...) :
+  installation of package ‘qPLEXanalyzer’ had non-zero exit status
+10: In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘pkg’
