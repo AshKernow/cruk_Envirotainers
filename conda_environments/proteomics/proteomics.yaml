@@ -21,3 +21,4 @@ dependencies:
   - bioconductor-qfeatures
   - bioconductor-proloc
   - bioconductor-clusterprofiler
+  - bioconductor-variancepartition
