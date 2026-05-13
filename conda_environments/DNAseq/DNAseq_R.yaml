@@ -1,0 +1,25 @@
+name: DNAseq_R
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - quarto
+  - r-base=4.5.3
+  - r-tidyverse
+  - r-readxl 
+  - r-patchwork
+  - r-knitr
+  - r-kableextra
+  - r-dt
+  - r-devtools
+  - r-biocmanager
+  - r-ggrepel
+  - r-pheatmap
+  - r-cowplot
+  - r-janitor
+  - bioconductor-clusterprofiler
+  - bioconductor-variancepartition
+  - bioconductor-mixomics
+  - bioconductor-maftools
+
