@@ -1,0 +1,17 @@
+name: Claude_Python
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13.13
+  - pip=26.1.1
+  - ca-certificates=2026.4.22
+  - openssl=3.6.2
+  # Lean general-purpose tooling
+  - pandas=3.0.3
+  - numpy=2.4.4
+  - requests=2.34.2
+  - pyyaml=6.0.3
+  - lxml=6.1.0
+  - beautifulsoup4=4.14.3
+  - rich=15.0.0
