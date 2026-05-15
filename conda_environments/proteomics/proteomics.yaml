@@ -13,12 +13,14 @@ dependencies:
   - r-kableextra
   - r-dt
   - r-devtools
+  - r-ggfortify
   - r-biocmanager
   - r-ggrepel
-  - r-ggfortify
+  - r-pheatmap
   - bioconductor-qplexanalyzer
   - bioconductor-msstatstmt
   - bioconductor-qfeatures
   - bioconductor-proloc
   - bioconductor-clusterprofiler
   - bioconductor-variancepartition
+  - bioconductor-mixomics
