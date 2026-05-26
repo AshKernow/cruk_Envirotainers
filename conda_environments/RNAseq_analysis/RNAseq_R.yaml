@@ -14,6 +14,7 @@ dependencies:
   - r-bsicons
   - r-cairo
   - r-circlize
+  - r-complexupset
   - r-devtools
   - r-dt
   - r-fs=1.6.7
@@ -67,6 +68,7 @@ dependencies:
   - bioconductor-limma
   - bioconductor-loomexperiment
   - bioconductor-mast
+  - bioconductor-mfuzz
   - bioconductor-milor
   - bioconductor-msigdb
   - bioconductor-omnipathr
