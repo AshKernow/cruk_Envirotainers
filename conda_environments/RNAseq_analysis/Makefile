@@ -17,7 +17,7 @@ create-env-r:
 	@echo "Creating conda environment 'RNAseq_R'..."
 	@if conda env list | grep -q "^RNAseq_R "; then \
 		echo "Environment 'RNAseq_R' already exists. Updating..."; \
-		mamba env update -f RNAseq_R.yaml --prune --yes; \
+		mamba env update -f RNAseq_R.yaml --prune; \
 	else \
 		mamba env create -f RNAseq_R.yaml --yes; \
 	fi
@@ -28,7 +28,7 @@ create-env-tools:
 	@echo "Creating conda environment 'RNAseq_Tools'..."
 	@if conda env list | grep -q "^RNAseq_Tools "; then \
 		echo "Environment 'RNAseq_Tools' already exists. Updating..."; \
-		mamba env update -f RNAseq_Tools.yaml --prune --yes; \
+		mamba env update -f RNAseq_Tools.yaml --prune; \
 	else \
 		mamba env create -f RNAseq_Tools.yaml --yes; \
 	fi
@@ -39,7 +39,7 @@ create-env-python:
 	@echo "Creating conda environment 'RNAseq_Python'..."
 	@if conda env list | grep -q "^RNAseq_Python "; then \
 		echo "Environment 'RNAseq_Python' already exists. Updating..."; \
-		mamba env update -f RNAseq_Python.yaml --prune --yes; \
+		mamba env update -f RNAseq_Python.yaml --prune; \
 	else \
 		mamba env create -f RNAseq_Python.yaml --yes; \
 	fi
