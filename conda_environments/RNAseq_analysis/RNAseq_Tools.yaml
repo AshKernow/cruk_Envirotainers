@@ -11,4 +11,5 @@ dependencies:
   - fastqc
   - multiqc
   - picard
+  - seqtk
   - salmon=1.10.3
