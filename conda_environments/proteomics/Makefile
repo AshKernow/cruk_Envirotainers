@@ -6,6 +6,13 @@ SHELL := /bin/bash
 CRAN_MIRROR ?= https://cloud.r-project.org
 R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    CONDA_SUBDIR_PREFIX := CONDA_SUBDIR=osx-64
+else
+    CONDA_SUBDIR_PREFIX :=
+endif
+
 # Default target
 all: create-env update-packages install-packages check-logs
 
@@ -14,9 +21,9 @@ create-env:
 	@echo "Creating conda environment 'proteomics'..."
 	@if conda env list | grep -q "^proteomics "; then \
 		echo "Environment 'proteomics' already exists. Updating..."; \
-		mamba env update -f proteomics.yaml --prune; \
+		$(CONDA_SUBDIR_PREFIX) mamba env update -f proteomics.yaml --prune; \
 	else \
-		mamba env create -f proteomics.yaml; \
+		$(CONDA_SUBDIR_PREFIX) mamba env create -f proteomics.yaml; \
 	fi
 	@echo "Conda environment 'proteomics' ready."
 
