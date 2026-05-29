@@ -6,6 +6,15 @@ SHELL := /bin/bash
 CRAN_MIRROR ?= https://cloud.r-project.org
 R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    CONDA_SUBDIR_PREFIX := CONDA_SUBDIR=osx-64
+    SED_INPLACE := sed -i ''
+else
+    CONDA_SUBDIR_PREFIX :=
+    SED_INPLACE := sed -i
+endif
+
 # Default target
 all: create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs
 
@@ -17,9 +26,9 @@ create-env-r:
 	@echo "Creating conda environment 'RNAseq_R'..."
 	@if conda env list | grep -q "^RNAseq_R "; then \
 		echo "Environment 'RNAseq_R' already exists. Updating..."; \
-		mamba env update -f RNAseq_R.yaml --prune; \
+		$(CONDA_SUBDIR_PREFIX) mamba env update -f RNAseq_R.yaml --prune; \
 	else \
-		mamba env create -f RNAseq_R.yaml --yes; \
+		$(CONDA_SUBDIR_PREFIX) mamba env create -f RNAseq_R.yaml --yes; \
 	fi
 	@echo "Conda environment 'RNAseq_R' ready."
 
@@ -28,9 +37,9 @@ create-env-tools:
 	@echo "Creating conda environment 'RNAseq_Tools'..."
 	@if conda env list | grep -q "^RNAseq_Tools "; then \
 		echo "Environment 'RNAseq_Tools' already exists. Updating..."; \
-		mamba env update -f RNAseq_Tools.yaml --prune; \
+		$(CONDA_SUBDIR_PREFIX) mamba env update -f RNAseq_Tools.yaml --prune; \
 	else \
-		mamba env create -f RNAseq_Tools.yaml --yes; \
+		$(CONDA_SUBDIR_PREFIX) mamba env create -f RNAseq_Tools.yaml --yes; \
 	fi
 	@echo "Conda environment 'RNAseq_Tools' ready."
 
@@ -39,9 +48,9 @@ create-env-python:
 	@echo "Creating conda environment 'RNAseq_Python'..."
 	@if conda env list | grep -q "^RNAseq_Python "; then \
 		echo "Environment 'RNAseq_Python' already exists. Updating..."; \
-		mamba env update -f RNAseq_Python.yaml --prune; \
+		$(CONDA_SUBDIR_PREFIX) mamba env update -f RNAseq_Python.yaml --prune; \
 	else \
-		mamba env create -f RNAseq_Python.yaml --yes; \
+		$(CONDA_SUBDIR_PREFIX) mamba env create -f RNAseq_Python.yaml --yes; \
 	fi
 	@echo "Conda environment 'RNAseq_Python' ready."
 
@@ -52,7 +61,7 @@ fix-cxx-standard:
 		echo "CXX11STD already set to -std=gnu++14 in $$MAKECONF — skipping."; \
 	elif grep -q "^CXX11STD" "$$MAKECONF"; then \
 		echo "WARNING: CXX11STD found in $$MAKECONF but not set to gnu++14 — overwriting."; \
-		sed -i 's|^CXX11STD.*|CXX11STD = -std=gnu++14|' "$$MAKECONF"; \
+		$(SED_INPLACE) 's|^CXX11STD.*|CXX11STD = -std=gnu++14|' "$$MAKECONF"; \
 		echo "WARNING: Done — CXX11STD updated to -std=gnu++14 in $$MAKECONF"; \
 	else \
 		echo "WARNING: Appending 'CXX11STD = -std=gnu++14' to $$MAKECONF"; \
