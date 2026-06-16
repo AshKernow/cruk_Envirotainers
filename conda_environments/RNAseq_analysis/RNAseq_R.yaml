@@ -25,6 +25,7 @@ dependencies:
   - r-ggprism
   - r-ggrepel
   - r-ggvenn
+  - r-heatmaply
   - r-igraph
   - r-kableextra
   - r-knitr
@@ -35,6 +36,8 @@ dependencies:
   - r-pak
   - r-patchwork
   - r-pheatmap
+  - r-ppcor
+  - r-quarto
   - r-readxl
   - r-rmarkdown
   - r-seurat
