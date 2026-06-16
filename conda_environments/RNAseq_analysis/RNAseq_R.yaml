@@ -45,6 +45,16 @@ dependencies:
   - r-svglite
   - r-tidyverse
   - r-ashr
+  - r-blme
+  - r-car
+  - r-factominer
+  - r-ggpubr
+  - r-glmmtmb
+  - r-lme4
+  - r-lmertest
+  - r-nloptr
+  - r-pbkrtest
+  - r-rstatix
   - r-umap
   - r-upsetr
   - r-xml
