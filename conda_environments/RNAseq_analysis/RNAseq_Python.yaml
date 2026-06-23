@@ -14,7 +14,8 @@ dependencies:
   # Python packages
   - celltypist=1.7.1
   - dash=3.2.0
-  - decoupler-py=2.1.1
+  - decoupler-py=2.1.6
+  - gseapy=1.2.1 
   - harmonypy=0.0.10
   - itables
   - leidenalg=0.10.2
