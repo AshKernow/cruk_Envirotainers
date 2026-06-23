@@ -13,6 +13,7 @@ dependencies:
   - r-knitr
   - r-languageserver
   - r-optparse
+  - r-ppcor
   - r-readxl
   - r-rmysql
   - r-tidyverse
