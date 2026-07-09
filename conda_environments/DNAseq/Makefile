@@ -1,4 +1,4 @@
-.PHONY: all create-env create-tools-env update-packages install-packages check-logs clean help
+.PHONY: all create-R create-env create-tools-env update-packages install-packages check-logs clean help
 
 SHELL := /bin/bash
 .SHELLFLAGS := -lc
@@ -8,6 +8,9 @@ R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
 # Default target
 all: create-env create-tools-env update-packages install-packages check-logs
+
+# Create/update only the R environment and run R package steps
+create-r: create-env update-packages install-packages check-logs
 
 # Create/update DNAseq_R conda environment
 create-env:
@@ -79,6 +82,7 @@ clean:
 help:
 	@echo "Available targets:"
 	@echo "  all              - Create/update environments, update R packages, install GitHub packages (default)"
+	@echo "  create-r         - Create/update DNAseq_R and run R package/update/install/log checks only"
 	@echo "  create-env       - Create/update the DNAseq_R conda environment"
 	@echo "  create-tools-env - Create/update the DNAseq_Tools conda environment"
 	@echo "  update-packages  - Update installed R packages in DNAseq_R and write update log"
