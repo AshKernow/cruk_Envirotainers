@@ -18,8 +18,22 @@ dependencies:
   - r-pheatmap
   - r-cowplot
   - r-janitor
+  - r-digest
+  - r-devtools
+  - r-xgboost
   - bioconductor-clusterprofiler
   - bioconductor-variancepartition
   - bioconductor-mixomics
   - bioconductor-maftools
-
+  - bioconductor-qdnaseq
+  - bioconductor-cghcall
+  - bioconductor-cghbase
+  - bioconductor-bsgenome.mmusculus.ucsc.mm39
+  - bioconductor-excluderanges
+  - bioconductor-rtracklayer
+  - bioconductor-annotationhub
+  - bioconductor-genomicranges
+  - bioconductor-biostrings
+  - bioconductor-dnacopy
+  - bioconductor-rsamtools
+  - ucsc-bigwigaverageoverbed

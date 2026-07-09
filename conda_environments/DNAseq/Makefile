@@ -1,4 +1,4 @@
-.PHONY: all create-env update-packages install-packages check-logs clean help
+.PHONY: all create-env create-tools-env update-packages install-packages check-logs clean help
 
 SHELL := /bin/bash
 .SHELLFLAGS := -lc
@@ -7,7 +7,7 @@ CRAN_MIRROR ?= https://cloud.r-project.org
 R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
 
 # Default target
-all: create-env update-packages install-packages check-logs
+all: create-env create-tools-env update-packages install-packages check-logs
 
 # Create/update DNAseq_R conda environment
 create-env:
@@ -19,6 +19,17 @@ create-env:
 		mamba env create -y -f DNAseq_R.yaml; \
 	fi
 	@echo "Conda environment 'DNAseq_R' ready."
+
+# Create/update DNAseq_Tools conda environment
+create-tools-env:
+	@echo "Creating conda environment 'DNAseq_Tools'..."
+	@if conda env list | grep -q "^DNAseq_Tools "; then \
+		echo "Environment 'DNAseq_Tools' already exists. Updating..."; \
+		mamba env update -y -f DNAseq_Tools.yaml --prune; \
+	else \
+		mamba env create -y -f DNAseq_Tools.yaml; \
+	fi
+	@echo "Conda environment 'DNAseq_Tools' ready."
 
 # Update installed R packages in the conda environment
 update-packages:
@@ -67,8 +78,9 @@ clean:
 # Help target
 help:
 	@echo "Available targets:"
-	@echo "  all              - Create/update environment, update R packages, install GitHub packages (default)"
+	@echo "  all              - Create/update environments, update R packages, install GitHub packages (default)"
 	@echo "  create-env       - Create/update the DNAseq_R conda environment"
+	@echo "  create-tools-env - Create/update the DNAseq_Tools conda environment"
 	@echo "  update-packages  - Update installed R packages in DNAseq_R and write update log"
 	@echo "  install-packages - Install GitHub-only R packages (PackagesToInstall.txt)"
 	@echo "  check-logs       - Check logs for failures and clean up if successful"
