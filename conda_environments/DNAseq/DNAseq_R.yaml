@@ -6,26 +6,32 @@ channels:
 dependencies:
   - quarto
   - r-base=4.5.3
-  - r-tidyverse
-  - r-readxl 
-  - r-patchwork
-  - r-knitr
-  - r-kableextra
-  - r-dt
-  - r-devtools
   - r-biocmanager
-  - r-ggrepel
-  - r-pheatmap
   - r-cowplot
-  - r-janitor
-  - r-digest
   - r-devtools
+  - r-devtools
+  - r-digest
+  - r-dt
+  - r-ggdendro
+  - r-ggrepel
+  - r-ggrepel
+  - r-ggsci
+  - r-janitor
+  - r-kableextra
+  - r-knitr
+  - r-optparse
+  - r-patchwork
+  - r-pheatmap
+  - r-readxl 
+  - r-remotes
+  - r-tidyverse
   - r-xgboost
   - bioconductor-clusterprofiler
   - bioconductor-variancepartition
   - bioconductor-mixomics
   - bioconductor-maftools
   - bioconductor-qdnaseq
+  - bioconductor-qdnaseq.mm10
   - bioconductor-cghcall
   - bioconductor-cghbase
   - bioconductor-bsgenome.mmusculus.ucsc.mm39
