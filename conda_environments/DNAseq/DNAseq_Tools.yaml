@@ -6,12 +6,14 @@ channels:
 dependencies:
   - samtools=1.23.1
   - seqtk=1.5
-  - fastqc=0.12.1
-  - multiqc=1.35
+  - fastqc
+  - multiqc
   - genmap=1.3.0
   - ucsc-bedgraphtobigwig=482
   - bedtools
   - picard
   - mosdepth
-  - preseq
   - r-base
+  - bcftools=1.23.1
+  - tabix
+  - hmmcopy

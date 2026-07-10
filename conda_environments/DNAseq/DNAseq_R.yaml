@@ -8,10 +8,13 @@ dependencies:
   - r-base=4.5.3
   - r-biocmanager
   - r-cowplot
+  - r-data.table
   - r-devtools
   - r-devtools
   - r-digest
+  - r-domc
   - r-dt
+  - r-foreach
   - r-ggdendro
   - r-ggrepel
   - r-ggrepel
@@ -22,6 +25,7 @@ dependencies:
   - r-optparse
   - r-patchwork
   - r-pheatmap
+  - r-plyr
   - r-readxl 
   - r-remotes
   - r-tidyverse
@@ -42,4 +46,6 @@ dependencies:
   - bioconductor-biostrings
   - bioconductor-dnacopy
   - bioconductor-rsamtools
+  - bioconductor-hmmcopy
+  - bioconductor-plyranges
   - ucsc-bigwigaverageoverbed

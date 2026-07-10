@@ -1,3 +1,4 @@
 # From GitHub
 iovlaicu/copynumber
 VanLoo-lab/ASCAT.sc
+broadinstitute/ichorCNA
