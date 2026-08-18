@@ -18,6 +18,8 @@ dependencies:
   - r-biocmanager
   - r-ggrepel
   - r-pheatmap
+  - r-ggraph
+  - r-tidygraph
   - bioconductor-qplexanalyzer
   - bioconductor-msstatstmt
   - bioconductor-qfeatures
