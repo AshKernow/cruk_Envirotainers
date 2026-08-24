@@ -19,9 +19,15 @@ dependencies:
   - r-biocmanager
   - r-ggrepel
   - r-pheatmap
+<<<<<<< HEAD
   - r-babelgene
   - r-writexl
   - r-stringdist
+=======
+  - r-ggraph
+  - r-tidygraph
+  - r-writexl
+>>>>>>> 9a7cfc463f477e9f1476522439439d594a0ba897
   - bioconductor-qplexanalyzer
   - bioconductor-msstatstmt
   - bioconductor-qfeatures
@@ -29,6 +35,7 @@ dependencies:
   - bioconductor-clusterprofiler
   - bioconductor-variancepartition
   - bioconductor-mixomics
+<<<<<<< HEAD
   - bioconductor-omnipathr
   - bioconductor-decoupler
   - bioconductor-complexheatmap
@@ -39,3 +46,7 @@ dependencies:
   - bioconductor-experimenthub
   - bioconductor-org.mm.eg.db
   - bioconductor-org.hs.eg.db
+=======
+  - bioconductor-decoupler
+  - bioconductor-omnipathr
+>>>>>>> 9a7cfc463f477e9f1476522439439d594a0ba897
