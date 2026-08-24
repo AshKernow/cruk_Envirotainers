@@ -20,6 +20,7 @@ dependencies:
   - r-pheatmap
   - r-ggraph
   - r-tidygraph
+  - r-writexl
   - bioconductor-qplexanalyzer
   - bioconductor-msstatstmt
   - bioconductor-qfeatures
@@ -27,3 +28,5 @@ dependencies:
   - bioconductor-clusterprofiler
   - bioconductor-variancepartition
   - bioconductor-mixomics
+  - bioconductor-decoupler
+  - bioconductor-omnipathr
