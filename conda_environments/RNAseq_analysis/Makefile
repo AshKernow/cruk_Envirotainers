@@ -29,7 +29,7 @@ else
 endif
 
 # Default target
-all: create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs
+all: create-env-r create-env-python create-env-tools fix-cxx-standard update-packages install-packages check-logs create-r4.6
 
 # R-only build (skips Python and Tools environments)
 create-r: create-env-r fix-cxx-standard update-packages install-packages check-logs
@@ -196,7 +196,7 @@ clean-r4.6:
 # Help target
 help:
 	@echo "Available targets:"
-	@echo "  all               - Create/update all environments, update R packages, install GitHub packages (default)"
+	@echo "  all               - Create/update all environments (incl. RNAseq_R4.6), update R packages, install GitHub packages (default)"
 	@echo "  create-r          - R-only build: create RNAseq_R, fix C++ standard, update and install R packages"
 	@echo "  create-env-r      - Create/update the RNAseq_R conda environment"
 	@echo "  create-env-python - Create/update the RNAseq_Python conda environment"
