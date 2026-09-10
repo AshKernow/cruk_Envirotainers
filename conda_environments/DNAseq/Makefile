@@ -17,7 +17,7 @@ create-env:
 	@echo "Creating conda environment 'DNAseq_R'..."
 	@if conda env list | grep -q "^DNAseq_R "; then \
 		echo "Environment 'DNAseq_R' already exists. Updating..."; \
-		mamba env update -y -f DNAseq_R.yaml --prune; \
+		mamba env update -f DNAseq_R.yaml --prune; \
 	else \
 		mamba env create -y -f DNAseq_R.yaml; \
 	fi
@@ -28,7 +28,7 @@ create-tools-env:
 	@echo "Creating conda environment 'DNAseq_Tools'..."
 	@if conda env list | grep -q "^DNAseq_Tools "; then \
 		echo "Environment 'DNAseq_Tools' already exists. Updating..."; \
-		mamba env update -y -f DNAseq_Tools.yaml --prune; \
+		mamba env update -f DNAseq_Tools.yaml --prune; \
 	else \
 		mamba env create -y -f DNAseq_Tools.yaml; \
 	fi

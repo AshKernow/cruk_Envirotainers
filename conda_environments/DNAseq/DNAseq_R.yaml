@@ -19,6 +19,8 @@ dependencies:
   - r-ggrepel
   - r-ggrepel
   - r-ggsci
+  - r-ggvenn
+  - r-ggvenndiagram
   - r-janitor
   - r-kableextra
   - r-knitr
@@ -29,7 +31,10 @@ dependencies:
   - r-readxl 
   - r-remotes
   - r-tidyverse
+  - r-upsetr
   - r-xgboost
+  - r-msigdbr
+  - r-pvclust
   - bioconductor-clusterprofiler
   - bioconductor-variancepartition
   - bioconductor-mixomics
