@@ -13,3 +13,7 @@ dependencies:
   - picard
   - seqtk
   - salmon=1.10.3
+  - gffread
+  - ucsc-gtftogenepred
+  - samtools
+  - subread

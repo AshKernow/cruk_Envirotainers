@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.5.1
+FROM rocker/rstudio:4.6.1
 
 RUN apt-get update && \
     apt-get install -y libxml2 libz-dev libbz2-dev libglpk-dev libcairo2-dev
@@ -6,10 +6,11 @@ RUN apt-get update && \
 # Additional libraries needed by R packages
 RUN apt-get install -y libxt-dev
 RUN apt-get install -y liblzma-dev 
+RUN apt-get install -y libxml2 libz-dev libbz2-dev libglpk-dev libcairo2-dev libuv1-dev
 
 # Install bioconductor
 RUN R --slave -e 'install.packages("BiocManager", lib="/usr/local/lib/R/site-library")'
-RUN R --slave -e 'BiocManager::install(version="3.21", ask = FALSE, lib="/usr/local/lib/R/site-library")'
+RUN R --slave -e 'BiocManager::install(version="3.23", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 
 # Install R packages
 RUN R --slave -e 'BiocManager::install("AnnotationHub", ask = FALSE, lib="/usr/local/lib/R/site-library")'
@@ -55,9 +56,9 @@ RUN R --slave -e 'BiocManager::install("tradeSeq", ask = FALSE, lib="/usr/local/
 RUN R --slave -e 'BiocManager::install("velociraptor", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 
 
-RUN apt-get install libcurl4-openssl-dev
-#RUN add-apt-repository -y ppa:cran/imagemagick
 RUN apt-get update
+RUN apt-get install -y libcurl4-openssl-dev
+#RUN add-apt-repository -y ppa:cran/imagemagick
 RUN apt-get install -y libmagick++-dev
 RUN R --slave -e 'BiocManager::install("singleCellTK", ask = FALSE, lib="/usr/local/lib/R/site-library")'
 # End R packages
