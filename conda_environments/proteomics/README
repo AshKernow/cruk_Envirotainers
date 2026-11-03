@@ -6,12 +6,16 @@ environment and install required R/Bioconductor packages for proteomics analyses
 ## What this repository does
 
 1. Creates or updates the `proteomics` conda environment from `proteomics.yaml`.
-   This step installs all R packages via the YAML. This ensures any package
-   dependencies are met and available in the environment.
-1. Updates already installed R packages inside that environment. This ensures
-   all packages are up to date with the latest versions (the conda versions may
-   not always be the latest).
-1. Installs requested Bioconductor/GitHub R packages.
+   This installs R 4.6 together with the compiler toolchain and the native
+   system libraries (zlib, libxml2, libuv, openssl, curl, etc.) needed to build
+   R packages from source. No R packages are installed via the YAML, because
+   there are no bioconda/conda-forge builds for R 4.6 / Bioconductor 3.23 yet.
+1. Sets `CXX11STD = -std=gnu++14` in R's `Makeconf` (required by newer
+   RcppArmadillo).
+1. Bootstraps `BiocManager`, `remotes` and `pak`.
+1. Installs all CRAN/Bioconductor/GitHub R packages listed in
+   `PackagesToInstall.txt` from source.
+1. Updates already installed R packages inside that environment.
 1. Checks installation logs for failures.
 
 ## Main files
@@ -19,7 +23,7 @@ environment and install required R/Bioconductor packages for proteomics analyses
 1. `Makefile`: Orchestrates environment creation, package updates, and checks.
 1. `proteomics.yaml`: Conda environment definition.
 1. `xInstallPackages.sh`: Iterates through package list and calls R installer.
-1. `xrInstallPackage.R`: Installs individual R packages (Bioconductor/GitHub).
+1. `xrInstallPackage.R`: Installs individual R packages (CRAN/Bioconductor/GitHub).
 1. `xUpdateRPackages.R`: Updates installed R packages and writes change logs.
 1. `PackagesToInstall.txt`: Package list consumed by installer scripts.
 
@@ -34,16 +38,20 @@ make
 This runs:
 
 1. `create-env`
-1. `update-packages`
+1. `fix-cxx-standard`
+1. `bootstrap-packages`
 1. `install-packages`
+1. `update-packages`
 1. `check-logs`
 
 ### Run steps individually
 
 ```bash
 make create-env
-make update-packages
+make fix-cxx-standard
+make bootstrap-packages
 make install-packages
+make update-packages
 make check-logs
 ```
 
@@ -80,4 +88,6 @@ If no failures are found, logs are cleaned up.
 
 1. `conda` and `mamba` available in shell.
 1. Network access to the selected CRAN mirror and package sources.
-1. Build tools available for source package compilation when needed.
+1. Build tools and system libraries are provided by the conda environment, so
+   host development packages are not required. The sysroot is pinned to glibc
+   2.28 (RHEL 8) so that built packages run on the cluster.

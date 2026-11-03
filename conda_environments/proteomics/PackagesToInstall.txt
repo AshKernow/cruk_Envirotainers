@@ -1,2 +1,43 @@
+# From CRAN
+stringdist
+babelgene
+circlize
+arrow
+tidyverse
+readxl 
+patchwork
+knitr
+kableExtra
+DT
+devtools
+ggfortify
+ggrepel
+pheatmap
+writexl
+ggraph
+tidygraph
+graphlayouts
+httr2
+tidyverse
+
+# From Bioconductor
+qPLEXanalyzer
+MSstatsTMT
+QFeatures
+pRoloc
+clusterProfiler
+variancePartition
+mixOmics
+OmnipathR
+decoupleR
+ComplexHeatmap
+STRINGdb
+RCy3
+msigdb
+GSEABase
+ExperimentHub
+org.Mm.eg.db
+org.Hs.eg.db
+
 # From GitHub
 crukci-bioinformatics/SimpleRIMEReport

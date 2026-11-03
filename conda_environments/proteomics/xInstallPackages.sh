@@ -13,7 +13,9 @@ for pkgNum in $(seq 0 $((numPackages - 1))); do
     logFile="${logDir}/${numPad}_PackageInstallation_${pkgNam}.log"
     echo "Installing package: $pkg"
     echo "Installing package: $pkg" > ${logFile}
-	conda run -n proteomics Rscript xrInstallPackage.R $pkg >> ${logFile} 2>&1
+    # Don't let one failure abort the loop; failures are reported in the summary
+    conda run -n proteomics Rscript xrInstallPackage.R $pkg >> ${logFile} 2>&1 || \
+        echo "%% ${pkgNam}: FAILURE" >> ${logFile}
 done
 
 cat ${logDir}/*.log | 
