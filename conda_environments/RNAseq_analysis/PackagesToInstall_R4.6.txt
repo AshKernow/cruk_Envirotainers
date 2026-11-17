@@ -53,6 +53,7 @@ umap
 UpSetR
 XML
 xml2
+openxlsx
 
 # Bioconductor (originally bioconductor-* in RNAseq_R.yaml)
 AnnotationDbi

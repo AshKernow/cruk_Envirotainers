@@ -9,6 +9,9 @@ dependencies:
   - quarto
   # R
   - r-base=4.5.3
+  # pip was once explicitly requested in this env; listing it stops --prune
+  # trying to remove it (conda-forge python depends on pip)
+  - pip
   # R packages - CRAN
   - r-biocmanager
   - r-bsicons

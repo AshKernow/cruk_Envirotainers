@@ -7,13 +7,17 @@ dependencies:
   - ca-certificates
   - openssl
   - zlib
+  # pysam on bioconda has no Python 3.14 builds yet
+  - python=3.13
   # Bioinformatics CLI tools
   - fastqc
   - multiqc
   - picard
   - seqtk
   - salmon=1.10.3
+  - libboost=1.85      # salmon haf24da9_3 links against 1.85 but doesn't pin it
   - gffread
   - ucsc-gtftogenepred
   - samtools
   - subread
+  - pysam
