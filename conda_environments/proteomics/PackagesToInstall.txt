@@ -12,6 +12,7 @@ DT
 devtools
 ggfortify
 ggrepel
+ggvenn
 pheatmap
 writexl
 ggraph
