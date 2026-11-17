@@ -1,0 +1,15 @@
+name: ATACseq_Tools
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - samtools
+  - htslib 
+  - bedtools
+  - picard
+  - deeptools
+  - macs3    
+  - ataqv    
+  - preseq   
+  - multiqc

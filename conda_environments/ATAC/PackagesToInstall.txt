@@ -1,0 +1,31 @@
+# From CRAN
+BiocManager
+Cairo
+devtools
+furrr
+ggdendro
+ggfortify
+ggrepel
+ggvenn
+kableExtra
+knitr
+optparse
+pak
+patchwork
+pheatmap
+readxl
+tidyverse
+UpSetR
+
+# From Bioconductor:
+rtracklayer
+GenomicAlignments
+Rsamtools
+txdbmaker
+ATACseqQC
+ChIPseeker
+DiffBind
+csaw
+edgeR
+DESeq2
+excluderanges
