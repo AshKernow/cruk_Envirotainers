@@ -1,0 +1,11 @@
+name: DNAseq_Python
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - python=3.12
+  - dnaio>=1.2      # fast paired FASTQ reading (cutadapt's parser), handles .gz
+  - python-isal     # accelerated gzip decompression, picked up by dnaio/xopen
+  - pandas>=2.2     
+  - matplotlib>=3.9 

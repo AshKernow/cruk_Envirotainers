@@ -1,92 +1,53 @@
-.PHONY: all create-R create-env create-tools-env update-packages install-packages check-logs clean help
+# ATACseq conda environments. Shared recipes and scripts live in
+# ../R_build_common (see the README there).
+include ../R_build_common/R_env.mk
 
-SHELL := /bin/bash
-.SHELLFLAGS := -lc
+R_ENV := ATACseq_R
+TOOLS_ENV := ATACseq_Tools
+PKG_LIST := PackagesToInstall.txt
 
-CRAN_MIRROR ?= https://cloud.r-project.org
-R_UPDATE_LOG ?= AllPackageInstallationLogs/00_RPackageUpdate.log
+.PHONY: all create-r create-env create-tools-env fix-cxx-standard bootstrap-packages update-packages install-packages check-logs clean help
 
 # Default target
-all: create-env create-tools-env update-packages install-packages check-logs
+all: create-env create-tools-env fix-cxx-standard bootstrap-packages update-packages install-packages check-logs
 
 # Create/update only the R environment and run R package steps
-create-r: create-env update-packages install-packages check-logs
+create-r: create-env fix-cxx-standard bootstrap-packages update-packages install-packages check-logs
 
-# Create/update ATACseq_R conda environment
 create-env:
-	@echo "Creating conda environment 'ATACseq_R'..."
-	@if conda env list | grep -q "^ATACseq_R "; then \
-		echo "Environment 'ATACseq_R' already exists. Updating..."; \
-		mamba env update -f ATACseq_R.yaml --prune; \
-	else \
-		mamba env create -y -f ATACseq_R.yaml; \
-	fi
-	@echo "Conda environment 'ATACseq_R' ready."
+	$(call create_conda_env,$(R_ENV),$(R_ENV).yaml)
 
-# Create/update ATACseq_Tools conda environment
 create-tools-env:
-	@echo "Creating conda environment 'ATACseq_Tools'..."
-	@if conda env list | grep -q "^ATACseq_Tools "; then \
-		echo "Environment 'ATACseq_Tools' already exists. Updating..."; \
-		mamba env update -f ATACseq_Tools.yaml --prune; \
-	else \
-		mamba env create -y -f ATACseq_Tools.yaml; \
-	fi
-	@echo "Conda environment 'ATACseq_Tools' ready."
+	$(call create_conda_env,$(TOOLS_ENV),$(TOOLS_ENV).yaml)
 
-# Update installed R packages in the conda environment
+fix-cxx-standard:
+	$(call fix_cxx_standard,$(R_ENV))
+
+bootstrap-packages:
+	$(call bootstrap_r_pkgs,$(R_ENV))
+
 update-packages:
-	@echo "Updating installed R packages in 'ATACseq_R'..."
-	@mkdir -p AllPackageInstallationLogs
-	@conda run -n ATACseq_R Rscript xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
-	@echo "R package update complete. Log: $(R_UPDATE_LOG)"
+	$(call update_r_pkgs,$(R_ENV),$(R_UPDATE_LOG))
 
-# Install GitHub R packages
 install-packages:
-	@if [[ ! -f PackagesToInstall.txt ]]; then \
-		echo "PackagesToInstall.txt not found. Skipping GitHub R package installation."; \
-	elif grep -Eq '^[[:space:]]*[^#[:space:]]' PackagesToInstall.txt; then \
-		echo "Installing GitHub R packages..."; \
-		./xInstallPackages.sh; \
-	else \
-		echo "No GitHub R packages to install. Skipping."; \
-	fi
+	$(call install_r_pkgs,$(R_ENV),$(PKG_LIST),$(R_LOG_DIR),$(R_SUMMARY_LOG))
 
-# Check logs for failures and clean up if successful
 check-logs:
-	@echo "Checking installation logs for failures..."
-	@if [[ ! -f AllPackageInstallationSummary.log ]]; then \
-		echo "No installation summary log found. Skipping log check."; \
-	elif grep -q "FAILURE" AllPackageInstallationSummary.log; then \
-		echo ""; \
-		echo "❌ INSTALLATION FAILURES DETECTED"; \
-		echo "Check AllPackageInstallationSummary.log for details."; \
-		echo ""; \
-		exit 1; \
-	else \
-		echo ""; \
-		echo "✅ All packages installed successfully!"; \
-		echo "Cleaning up log files..."; \
-		rm -rf AllPackageInstallationLogs AllPackageInstallationSummary.log; \
-		echo "Done."; \
-		echo ""; \
-	fi
+	$(call check_r_logs,$(R_LOG_DIR),$(R_SUMMARY_LOG))
 
-# Clean up log files (manual cleanup)
 clean:
-	@echo "Removing log files..."
-	@rm -rf AllPackageInstallationLogs AllPackageInstallationSummary.log
-	@echo "Logs removed."
+	$(call clean_r_logs,$(R_LOG_DIR),$(R_SUMMARY_LOG))
 
-# Help target
 help:
 	@echo "Available targets:"
-	@echo "  all              - Create/update environments, update R packages, install GitHub packages (default)"
-	@echo "  create-r         - Create/update ATACseq_R and run R package/update/install/log checks only"
-	@echo "  create-env       - Create/update the ATACseq_R conda environment"
-	@echo "  create-tools-env - Create/update the ATACseq_Tools conda environment"
-	@echo "  update-packages  - Update installed R packages in ATACseq_R and write update log"
-	@echo "  install-packages - Install GitHub-only R packages (PackagesToInstall.txt)"
-	@echo "  check-logs       - Check logs for failures and clean up if successful"
-	@echo "  clean            - Remove log files"
-	@echo "  help             - Show this help message"
+	@echo "  all                - Create/update both environments, then run all R package steps (default)"
+	@echo "  create-r           - Create/update $(R_ENV) and run the R package steps only"
+	@echo "  create-env         - Create/update the $(R_ENV) conda environment"
+	@echo "  create-tools-env   - Create/update the $(TOOLS_ENV) conda environment"
+	@echo "  fix-cxx-standard   - Set CXX11STD=C++14 in $(R_ENV)'s R Makeconf (fixes RcppArmadillo build)"
+	@echo "  bootstrap-packages - Install BiocManager/remotes/pak into $(R_ENV)"
+	@echo "  update-packages    - Update installed R packages in $(R_ENV) and write update log"
+	@echo "  install-packages   - Install R packages listed in $(PKG_LIST)"
+	@echo "  check-logs         - Check logs for failures and clean up if successful"
+	@echo "  clean              - Remove log files"
+	@echo "  help               - Show this help message"

@@ -18,9 +18,7 @@ transcriptomics data processing and visualization.
 
 1. `Makefile`: Orchestrates environment creation, package updates, and checks.
 1. `RNAseq_analysis.yaml`: Conda environment definition.
-1. `xInstallPackages.sh`: Iterates through package list and calls R installer.
-1. `xrInstallPackage.R`: Installs individual R packages (Bioconductor/GitHub).
-1. `xUpdateRPackages.R`: Updates installed R packages and writes change logs.
+1. `../R_build_common/`: shared build scripts and Makefile recipes (see the README there).
 1. `PackagesToInstall.txt`: Package list consumed by installer scripts.
 
 ## Usage
@@ -52,7 +50,7 @@ make check-logs
 The `update-packages` target updates R packages using:
 
 ```bash
-conda run -n RNAseq Rscript xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
+conda run -n RNAseq Rscript ../R_build_common/xUpdateRPackages.R "$(CRAN_MIRROR)" "$(R_UPDATE_LOG)"
 ```
 
 Default values (defined in `Makefile`):
