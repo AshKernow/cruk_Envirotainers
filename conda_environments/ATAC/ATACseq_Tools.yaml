@@ -13,3 +13,4 @@ dependencies:
   - ataqv    
   - preseq   
   - multiqc
+  - meme

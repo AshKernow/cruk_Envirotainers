@@ -16,10 +16,13 @@ pheatmap
 readxl
 tidyverse
 UpSetR
+mgcv
 
 # From Bioconductor:
+cqn
 rtracklayer
 GenomicAlignments
+GenomeInfoDbData
 Rsamtools
 txdbmaker
 ATACseqQC
@@ -29,3 +32,4 @@ csaw
 edgeR
 DESeq2
 excluderanges
+chromVAR
