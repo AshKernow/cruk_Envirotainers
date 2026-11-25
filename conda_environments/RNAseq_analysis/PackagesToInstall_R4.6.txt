@@ -91,6 +91,7 @@ scRNAseq
 SingleCellExperiment
 TabulaMurisData
 tximport
+UCell
 velociraptor
 
 # From GitHub (same as PackagesToInstall.txt)

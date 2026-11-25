@@ -36,3 +36,4 @@ dependencies:
     - session_info
     - infercnvpy==0.6.1
     - gtfparse
+    - scdrs
