@@ -19,3 +19,4 @@ dependencies:
   - hmmcopy
   - bbmap
   - ucsc-liftover
+  - fgbio
